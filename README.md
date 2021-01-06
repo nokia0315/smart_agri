@@ -55,12 +55,12 @@ Things you may want to cover:
 <農作物を収穫して食べてみたい時>
 
 ## 設計書
-- ER図<https://app.diagrams.net/#G1jbkIhR2fdO6XG7WKQYV4O2yNz8Ykn64e>
-- テーブル定義書<https://docs.google.com/spreadsheets/d/1wIDeF1rJ4rvhjU--G5Uc82veMepC0BIvt3IU6dlq82M/edit#gid=213430777>
+- ER図<https://drive.google.com/file/d/1jbkIhR2fdO6XG7WKQYV4O2yNz8Ykn64e/view?usp=sharing>
+- テーブル定義書<https://docs.google.com/spreadsheets/d/1wIDeF1rJ4rvhjU--G5Uc82veMepC0BIvt3IU6dlq82M/edit?usp=sharing>
 
 ## チャレンジ要素一覧
 
-<https://docs.google.com/spreadsheets/d/1P1V2QlIvA0gd_Xqu8yYKZZr4JO21skJWH7lF2pFPL0A/edit#gid=0>
+<https://docs.google.com/spreadsheets/d/1P1V2QlIvA0gd_Xqu8yYKZZr4JO21skJWH7lF2pFPL0A/edit?usp=sharing>
 
 ## 開発環境
 
