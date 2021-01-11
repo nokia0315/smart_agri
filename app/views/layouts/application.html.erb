@@ -12,13 +12,13 @@
   <body>
     <% if user_signed_in? %>
       <li>
-        TOP
+        <%= link_to "TOP", "/" %>
       </li>
       <li>
         求人一覧
       </li>
       <li>
-        会員マイページ
+        <%= link_to "マイページ", user_path(current_user.id) %>
       </li>
       <li>
         <%= link_to "ログアウト", destroy_user_session_path, method: :delete %>
@@ -79,7 +79,7 @@
       </li>
 
     <% end %>
-    
+
     <%= yield %>
   </body>
 </html>
