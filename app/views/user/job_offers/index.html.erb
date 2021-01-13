@@ -1,0 +1,10 @@
+<div class="row">
+  <div class="col-md-9 col-xs-offset-1">
+		<h2 class="job_offer-headline head-line title_h2 text-center">求人一覧
+  	  <span>全(<%= @job_offers.count %>件)</span>
+		</h2>
+  <div class="clearfix job_offer-box">
+  	 <% @job_offers.each do |job_offer| %>
+  	  <%= render "job_offers_each", job_offer: job_offer %>
+  	 <% end %>
+  </div>

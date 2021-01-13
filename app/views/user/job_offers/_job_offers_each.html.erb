@@ -1,0 +1,10 @@
+<div class="job_offer-container text-center">
+      <%= link_to users_job_offer_path(job_offer.id), class: "btn-link", :style=>"color:#0099FF;" do %>
+      <div id="img_field" class="job_offer">
+        <%#= attachment_image_tag(job_offer, :job_offers_image, size: "180x130", fallback: "no_image.jpg") %>
+      </div>
+      <div class="job_offer-title">
+        <%= job_offer.title %>
+      </div>
+      <% end %>
+</div>

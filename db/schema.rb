@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_01_11_093707) do
+ActiveRecord::Schema.define(version: 2021_01_13_042017) do
 
   create_table "admins", force: :cascade do |t|
     t.string "email", default: "", null: false
@@ -50,6 +50,18 @@ ActiveRecord::Schema.define(version: 2021_01_11_093707) do
     t.datetime "updated_at", null: false
     t.index ["email"], name: "index_farmers_on_email", unique: true
     t.index ["reset_password_token"], name: "index_farmers_on_reset_password_token", unique: true
+  end
+
+  create_table "job_offers", force: :cascade do |t|
+    t.integer "genre_id"
+    t.string "image_id"
+    t.string "title"
+    t.text "explanation"
+    t.text "reward"
+    t.boolean "is_valid"
+    t.integer "farmer_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "users", force: :cascade do |t|

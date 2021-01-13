@@ -1,0 +1,42 @@
+<div class="row">
+  <div class="col-md-8 col-md-offset-2">
+    <h3>新規求人追加</h3>
+  </div>
+</div>
+
+<%= form_with model: @job_offer, :url => job_offers_path, local:true do |f| %>
+  <div class="row">
+    <div class="col-md-4 col-md-offset-2">
+  			<%#= attachment_image_tag @job_offer, :job_offers_image, src: "", size: "300x250", id: "preview", fallback: "no_image.jpg" %>
+      <div class="field">
+        <%#= f.attachment_field :job_offers_image, placeholder: "商品画像", style: "padding: 15px;", onchange: "expressFile()" %>
+      </div>
+    </div>
+    <div class="col-md-5">
+      <div class="field row control-rabel-bottom">
+        <%= f.label :title, "タイトル", class:"control-label-1" %>
+        <%= f.text_field :title, class:'control-form' %>
+      </div>
+      <div class="field row control-rabel-bottom">
+        <%= f.label :explanation, "説明", class:"control-label" %>
+        <%= f.text_area :explanation, class:'control-form' %>
+      </div>
+      <div class="field row control-rabel-bottom">
+        <%#= f.label :genre_id, "ジャンル", class:"control-label" %>
+        <%#= f.collection_select(:genre_id, @genres, :id, :name) %>
+      </div>
+      <div class="field row control-rabel-bottom">
+        <%= f.label :reward, "報酬", class:"control-label" %>
+        <%= f.text_field :reward, class:'control-form' %>
+      </div>
+      <div class="field row control-rabel-bottom">
+        <%= f.label :is_valid, "求人ステータス", class:"control-label-2" %>
+        <%= f.select :is_valid, [["募集中", "募集中"], ["締め切り", "締め切り"]], class:"control-label" %>
+      </div>
+      <br>
+      <div class="actions row n-btn">
+        <%= f.submit '新規登録', class:'btn btn-primary' %>
+      </div>
+    </div>
+  </div>
+<% end %>

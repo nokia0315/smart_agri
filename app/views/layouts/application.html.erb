@@ -15,7 +15,7 @@
         <%= link_to "TOP", "/" %>
       </li>
       <li>
-        求人一覧
+        <%= link_to "求人一覧", users_job_offers_path %>
       </li>
       <li>
         <%= link_to "マイページ", user_path(current_user.id) %>
@@ -28,7 +28,7 @@
         TOP
       </li>
       <li>
-        求人一覧
+        <%= link_to "求人一覧", job_offers_path %>
       </li>
       <li>
         農業者マイページ

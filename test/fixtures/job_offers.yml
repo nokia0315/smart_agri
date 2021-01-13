@@ -1,0 +1,19 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  genre_id: 1
+  image_id: MyString
+  title: MyString
+  explanation: MyText
+  reward: MyText
+  is_valid: false
+  farmer_id: 1
+
+two:
+  genre_id: 1
+  image_id: MyString
+  title: MyString
+  explanation: MyText
+  reward: MyText
+  is_valid: false
+  farmer_id: 1
