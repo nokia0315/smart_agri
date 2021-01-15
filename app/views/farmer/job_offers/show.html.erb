@@ -10,31 +10,32 @@
 				<p>
 					タイトル　　　　　<%= @job_offer.title %>
 				</p>
-      </div><br>
-      <div class="field">
+      </div>
+	    <div class="field">
 				<p>
 					説明　　　　<%= @job_offer.explanation %>
-				</p><br>
-      </div>
-      <div class="field">
+				</p>
+	    </div>
+	    <div class="field">
 				<p>
 					報酬　　　　<%= @job_offer.reward %>
-				</p><br>
-      </div>
-      <div class="field">
+				</p>
+	    </div>
+	    <div class="field">
 				<p>
 				</p>
-      </div>
-      <div class="field">
+	    </div>
+	    <div class="field">
 				<p>
 					販売ステータス
 	        <%= @job_offer.is_valid %>
 				</p>
-      </div>
-      <div class="actions col-md-9" style="text-align:right;">
+	    </div>
+      <div class="actions col-md-9">
       	<%= link_to "編集する", edit_job_offer_path(@job_offer), class: "glyphicon glyphicon-pencil btn btn-success pull-right" %>
     	  <%= link_to "一覧に戻る", job_offers_path, class: "glyphicon glyphicon-pencil btn btn-success pull-right" %>
-			</div>
+        <%= link_to "削除する", job_offer_path(@job_offer), method: :delete, "data-confirm" => "Are you sure？", class: 'btn btn-sm btn-danger' %>
+      </div>
   	</div>
 	</div>
 </div>

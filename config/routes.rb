@@ -27,10 +27,18 @@ Rails.application.routes.draw do
     	     patch 'out'
     	  end
     end
+    get 'users/farmers' => 'farmers#index'
+    get 'users/farmers/:id' => 'farmers#show',as: 'users_farmer'
   end
   scope module: :farmer do
     scope :farmers do
      resources :job_offers
+    end
+    resources :farmers do
+      collection do
+    	     get 'quit'
+    	     patch 'out'
+    	  end
     end
   end
 end

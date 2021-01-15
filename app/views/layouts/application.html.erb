@@ -10,7 +10,8 @@
   </head>
 
   <body>
-    <% if user_signed_in? %>
+    <header>
+      <% if user_signed_in? %>
       <li>
         <%= link_to "TOP", "/" %>
       </li>
@@ -31,7 +32,7 @@
         <%= link_to "求人一覧", job_offers_path %>
       </li>
       <li>
-        農業者マイページ
+        <%= link_to "農業者マイページ", farmer_path(current_farmer.id) %>
       </li>
       <li>
         <%= link_to "ログアウト", destroy_farmer_session_path, method: :delete %>
@@ -79,7 +80,10 @@
       </li>
 
     <% end %>
-
+    </header>
+    <div id="flash">
+        <%= render "layouts/flash" %>
+      </div>
     <%= yield %>
   </body>
 </html>

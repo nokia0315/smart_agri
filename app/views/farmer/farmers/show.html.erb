@@ -1,0 +1,38 @@
+<div class="row">
+	<div class="col-xs-offset-1 col-xs-8">
+		<h2 class="head-line text-center title_h2"><%= @farmer.first_name %><%= @farmer.last_name %>さんのマイページ</h2>
+		<p><strong class="information-link"><i class="far fa-farmer"></i>登録情報</strong><br>
+			<% if @farmer == current_farmer %>
+ 				<%= link_to "編集する", edit_farmer_path(@farmer),class: "glyphicon glyphicon-pencil btn btn-success"  %><br>
+  			<%= link_to "パスワードを変更する", edit_farmer_registration_path, class: "glyphicon glyphicon-pencil btn btn-warning" %>
+ 			<% end %>
+ 		</p>
+		<table class="table table-bordered table-condensed" >
+			<tbody>
+				<tr>
+					<td class="info">氏名</td>
+					<td class="text-left"><%= @farmer.first_name %><%= @farmer.last_name %></td>
+				</tr>
+				<tr>
+					<td class="info">カナ</td>
+					<td class="text-left"><%= @farmer.kana_first_name %><%= @farmer.kana_last_name %></td>
+				</tr>
+				<tr>
+					<td class="info">郵便番号</td>
+					<td class="text-left"><%= @farmer.postal_code %></td>
+				</tr>
+				<tr>
+					<td class="info">住所</td>
+					<td class="text-left"><%= @farmer.residence %></td>
+				</tr>
+				<tr>
+					<td class="info">電話番号</td>
+					<td class="text-left"><%= @farmer.phone_number %></td>
+				</tr>
+				<tr>
+					<td class="info">メールアドレス</td>
+					<td class="text-left"><%= @farmer.email %></td>
+				</tr>
+			</tbody>
+		</table>
+		<%= link_to "農業者一覧", farmers_path %>

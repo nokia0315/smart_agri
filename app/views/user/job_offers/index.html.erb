@@ -4,7 +4,33 @@
   	  <span>全(<%= @job_offers.count %>件)</span>
 		</h2>
   <div class="clearfix job_offer-box">
-  	 <% @job_offers.each do |job_offer| %>
-  	  <%= render "job_offers_each", job_offer: job_offer %>
-  	 <% end %>
+    <table class="table">
+
+      <thead>
+        <tr>
+          <td>求人名</td>
+          <td>説明</td>
+          <td>報酬</td>
+          <td>ジャンル</td>
+          <td>ステータス</td>
+          <td></td>
+        </tr>
+      </thead>
+      <tbody>
+      <% @job_offers.each do |job_offer| %>
+        <tr>
+          <td>
+            <%= link_to users_job_offer_path(job_offer) do %>
+              <%= job_offer.title %>
+            <% end %>
+          </td>
+          <td><%= job_offer.explanation %></td>
+          <td><%= job_offer.reward %></td>
+          <td><%#= job_offer.genre.name %></td>
+          <td><%= job_offer.is_valid %></td>
+          <td> <%= link_to job_offer.farmer, users_farmer_path(job_offer.farmer.id) %></td>
+        </tr>
+      <% end %>
+      </tbody>
+    </table>
   </div>

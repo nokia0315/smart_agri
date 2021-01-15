@@ -1,4 +1,7 @@
 class Farmer::JobOffersController < ApplicationController
+
+  before_action :authenticate_farmer!
+
   def top
     now = Time.current
     @orders = Order.where(created_at: now.all_day)
@@ -11,7 +14,9 @@ class Farmer::JobOffersController < ApplicationController
 
   def create
     @job_offer = JobOffer.new(job_offer_params)
-     if @job_offer.save
+    @job_offer.farmer = current_farmer
+     if @job_offer.save!
+       flash[:notice] = "新規求人を登録しました"
        redirect_to job_offer_path(@job_offer)
      else
        render:new
@@ -33,8 +38,12 @@ class Farmer::JobOffersController < ApplicationController
 
   def update
     job_offer = JobOffer.find(params[:id])
-    job_offer.update(job_offer_params)
-    redirect_to job_offers_path
+    if job_offer.update(job_offer_params)
+     flash[:success] = "求人内容をを変更しました"
+     redirect_to job_offers_path
+    else
+     render :edit
+    end
   end
 
   def destroy
