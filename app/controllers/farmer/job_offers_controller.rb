@@ -9,7 +9,7 @@ class Farmer::JobOffersController < ApplicationController
 
   def new
     @job_offer = JobOffer.new
-    # @genres = Genre.all
+    @genres = Genre.all
   end
 
   def create
@@ -33,7 +33,7 @@ class Farmer::JobOffersController < ApplicationController
 
   def edit
     @job_offer = JobOffer.find(params[:id])
-    # @genres = Genre.all
+    @genres = Genre.all
   end
 
   def update

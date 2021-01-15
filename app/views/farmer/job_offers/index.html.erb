@@ -31,7 +31,7 @@
       </td>
       <td><%= job_offer.explanation %></td>
       <td><%= job_offer.reward %></td>
-      <td><%#= job_offer.genre.name %></td>
+      <td><%= job_offer.genre.name %></td>
       <td><%= job_offer.is_valid %></td>
       <td></td>
     </tr>
@@ -39,3 +39,4 @@
   </tbody>
 </table>
 <%= link_to "新規求人を追加", new_job_offer_path %>
+<%= link_to "募集形態を追加", genres_path %>

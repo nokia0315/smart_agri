@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_01_13_042017) do
+ActiveRecord::Schema.define(version: 2021_01_15_135908) do
 
   create_table "admins", force: :cascade do |t|
     t.string "email", default: "", null: false
@@ -32,6 +32,15 @@ ActiveRecord::Schema.define(version: 2021_01_13_042017) do
     t.index ["reset_password_token"], name: "index_admins_on_reset_password_token", unique: true
   end
 
+  create_table "blogs", force: :cascade do |t|
+    t.text "title"
+    t.string "image_id"
+    t.text "explanation"
+    t.integer "farmer_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "farmers", force: :cascade do |t|
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
@@ -50,6 +59,20 @@ ActiveRecord::Schema.define(version: 2021_01_13_042017) do
     t.datetime "updated_at", null: false
     t.index ["email"], name: "index_farmers_on_email", unique: true
     t.index ["reset_password_token"], name: "index_farmers_on_reset_password_token", unique: true
+  end
+
+  create_table "favos", force: :cascade do |t|
+    t.integer "user_id"
+    t.integer "job_offer_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "genres", force: :cascade do |t|
+    t.string "name"
+    t.boolean "is_valid", default: true
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "job_offers", force: :cascade do |t|

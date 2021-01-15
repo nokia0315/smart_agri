@@ -16,23 +16,30 @@ Rails.application.routes.draw do
   }
   scope module: :user do
     root to: 'job_offers#top'
-    get 'users/job_offers' => 'job_offers#index'
-    get 'users/job_offers/:id' => 'job_offers#show',as: 'users_job_offer'
+    scope :users do
+      resources :job_offers, only: [:index, :show],as: 'users_job_offers' do
+       resource :favos, only: [:create, :destroy]
+      end
+    end
+
   end
 
   scope module: :user do
+   get 'users/farmers' => 'farmers#index',as: 'users_farmers_index'
     resources :users do
     		collection do
     	     get 'quit'
     	     patch 'out'
     	  end
     end
-    get 'users/farmers' => 'farmers#index'
     get 'users/farmers/:id' => 'farmers#show',as: 'users_farmer'
   end
+
   scope module: :farmer do
     scope :farmers do
      resources :job_offers
+     resources :genres, only: [:index, :create, :edit, :update, :show]
+     resources :blogs, only: [:new, :create, :index, :show, :destroy]
     end
     resources :farmers do
       collection do

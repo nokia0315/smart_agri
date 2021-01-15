@@ -6,7 +6,7 @@ class User::JobOffersController < ApplicationController
   end
 
   def index
-        # @genres = Genre.all
+        @genres = Genre.all
         @job_offers = JobOffer.all
 
         # def search
@@ -19,7 +19,7 @@ class User::JobOffersController < ApplicationController
   def show
       @job_offers = JobOffer.all
       @job_offer = JobOffer.find(params[:id])
-      # @genres = Genre.all
+      @genres = Genre.all
   end
 
 	 private

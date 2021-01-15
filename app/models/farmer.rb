@@ -4,4 +4,7 @@ class Farmer < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
   has_many :job_offers, dependent: :destroy
+  has_many :blogs, dependent: :destroy
+
+  # attachment :image
 end

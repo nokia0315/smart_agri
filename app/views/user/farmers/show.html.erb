@@ -1,0 +1,46 @@
+<div class="row">
+	<div class="col-xs-offset-1 col-xs-8">
+		<h2 class="head-line text-center title_h2"><%= @farmer.first_name %><%= @farmer.last_name %>さんのプロフィール</h2>
+		<p><strong class="information-link"><i class="far fa-farmer"></i>登録情報</strong><br>
+ 		</p>
+		<table class="table table-bordered table-condensed" >
+			<tbody>
+				<tr>
+					<td class="info">氏名</td>
+					<td class="text-left"><%= @farmer.first_name %><%= @farmer.last_name %></td>
+				</tr>
+				<tr>
+					<td class="info">カナ</td>
+					<td class="text-left"><%= @farmer.kana_first_name %><%= @farmer.kana_last_name %></td>
+				</tr>
+				<tr>
+					<td class="info">郵便番号</td>
+					<td class="text-left"><%= @farmer.postal_code %></td>
+				</tr>
+				<tr>
+					<td class="info">住所</td>
+					<td class="text-left"><%= @farmer.residence %></td>
+				</tr>
+				<tr>
+					<td class="info">電話番号</td>
+					<td class="text-left"><%= @farmer.phone_number %></td>
+				</tr>
+				<tr>
+					<td class="info">メールアドレス</td>
+					<td class="text-left"><%= @farmer.email %></td>
+				</tr>
+			</tbody>
+		</table>
+      <h2>ブログ</h2>
+		<% @blogs.each do |blog| %>
+<div>
+  <%= attachment_image_tag blog, :image, fallback: "no_image.jpg", size: '300x300' %>
+  <p>投稿農業者画像：<%#= link_to users_farmer_path(blog.farmer.id) do %><%#= attachment_image_tag blog.farmer, :image, :fill, 40, 40, fallback: "no_image.jpg", size: '40x40' %><%# end %></p>
+  <p>タイトル：<%= blog.title %></p>
+  <p>説明：<%= blog.explanation %></p>
+  <p>農業者ネーム：<%= blog.farmer.first_name %></p>
+  <p>投稿日時：<%= blog.created_at.strftime('%Y/%m/%d') %></p>
+
+</div>
+<% end %>
+		<%= link_to "農業者一覧", users_farmers_index_path %>

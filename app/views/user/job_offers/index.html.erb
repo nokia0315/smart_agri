@@ -13,7 +13,7 @@
           <td>報酬</td>
           <td>ジャンル</td>
           <td>ステータス</td>
-          <td></td>
+          <td>農業者</td>
         </tr>
       </thead>
       <tbody>
@@ -26,9 +26,9 @@
           </td>
           <td><%= job_offer.explanation %></td>
           <td><%= job_offer.reward %></td>
-          <td><%#= job_offer.genre.name %></td>
+          <td><%= job_offer.genre.name %></td>
           <td><%= job_offer.is_valid %></td>
-          <td> <%= link_to job_offer.farmer, users_farmer_path(job_offer.farmer.id) %></td>
+          <td> <%= link_to job_offer.farmer.first_name, users_farmer_path(job_offer.farmer.id) %></td>
         </tr>
       <% end %>
       </tbody>

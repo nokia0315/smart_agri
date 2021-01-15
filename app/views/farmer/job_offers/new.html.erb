@@ -22,8 +22,8 @@
         <%= f.text_area :explanation, class:'control-form' %>
       </div>
       <div class="field row control-rabel-bottom">
-        <%#= f.label :genre_id, "ジャンル", class:"control-label" %>
-        <%#= f.collection_select(:genre_id, @genres, :id, :name) %>
+        <%= f.label :genre_id, "ジャンル", class:"control-label" %>
+        <%= f.collection_select(:genre_id, @genres, :id, :name) %>
       </div>
       <div class="field row control-rabel-bottom">
         <%= f.label :reward, "報酬", class:"control-label" %>

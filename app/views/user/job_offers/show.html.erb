@@ -27,9 +27,22 @@
 	    </div>
 	    <div class="field">
 				<p>
-					農業者          <%= link_to @job_offer.farmer, users_farmer_path %>
+					農業者          <%= link_to @job_offer.farmer.first_name, users_farmer_path(@job_offer.farmer.id) %>
 				</p>
 	    </div>
+	    <% if @job_offer.favorited_by?(current_user) %>
+    <p>
+      <%= link_to users_job_offer_favos_path(@job_offer), method: :delete do %>
+        ♥<%= @job_offer.favos.count %> いいね
+      <% end %>
+    </p>
+    <% else %>
+    <p>
+      <%= link_to users_job_offer_favos_path(@job_offer), method: :post do %>
+        ♡<%= @job_offer.favos.count %> いいね
+      <% end %>
+    </p>
+  <% end %>
       <div class="actions col-md-9">
     	  <%= link_to "一覧に戻る", users_job_offers_path, class: "glyphicon glyphicon-pencil btn btn-success pull-right" %>
       </div>
