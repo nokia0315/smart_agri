@@ -29,6 +29,10 @@
 					<td class="info">メールアドレス</td>
 					<td class="text-left"><%= @farmer.email %></td>
 				</tr>
+				<tr>
+					<td class="info">自己紹介</td>
+					<td class="text-left"><%= @farmer.introduction %></td>
+				</tr>
 			</tbody>
 		</table>
       <h2>ブログ</h2>
@@ -43,4 +47,42 @@
 
 </div>
 <% end %>
-		<%= link_to "農業者一覧", users_farmers_index_path %>
+<h4>求人一覧</h4>
+
+<div class="col-md-12 col-md-offset-1" style="text-align: right;">
+  <%#= link_to new_administrator_job_offer_path, class: "btn btn-info fab-buttons  new_job_offer" do %>
+  <i class ="fas fa-plus" ></i>
+  <%# end %>
+</div>
+<table class="table">
+  <tr></tr>
+  <thead>
+    <tr>
+      <td>求人名</td>
+      <td>説明</td>
+      <td>報酬</td>
+      <td>ジャンル</td>
+      <td>ステータス</td>
+      <td></td>
+    </tr>
+  </thead>
+  <tbody>
+  <% @job_offers.each do |job_offer| %>
+    <tr>
+      <td>
+        <%= link_to users_job_offer_path(job_offer) do %>
+          <%= job_offer.title %>
+        <% end %>
+      </td>
+      <td><%= job_offer.explanation %></td>
+      <td><%= job_offer.reward %></td>
+      <td><%= job_offer.genre.name %></td>
+      <td><%= job_offer.is_valid %></td>
+      <td></td>
+    </tr>
+  <% end %>
+  </tbody>
+</table>
+		<%= link_to "農業者一覧", users_farmers_path %>
+    <%= link_to "レビュー投稿", new_users_farmers_review_path %>
+

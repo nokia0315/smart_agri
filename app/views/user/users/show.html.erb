@@ -10,6 +10,9 @@
 		<table class="table table-bordered table-condensed" >
 			<tbody>
 				<tr>
+					<td><%= attachment_image_tag @user, :image, :fill, 100, 100, format: 'jpeg', fallback: "no_image.jpg" %></td>
+				</tr>
+				<tr>
 					<td class="info">氏名</td>
 					<td class="text-left"><%= @user.first_name %><%= @user.last_name %></td>
 				</tr>
@@ -33,5 +36,17 @@
 					<td class="info">メールアドレス</td>
 					<td class="text-left"><%= @user.email %></td>
 				</tr>
+				<tr>
+					<td class="info">自己紹介</td>
+					<td class="text-left"><%= @user.introduction %></td>
+				</tr>
 			</tbody>
 		</table>
+<h2>取り敢えずキープ</h2>
+	<% @favos.each  do |favo| %>
+	<%= link_to users_job_offer_path(favo.job_offer_id) do %>
+  <%= favo.job_offer.title %>
+        <% end %>
+  <%= favo.job_offer.explanation %>
+  <%= favo.job_offer.reward %>
+　<% end  %>

@@ -6,12 +6,12 @@ class Farmer::FarmersController < ApplicationController
 
   def show
     @farmer = current_farmer
-    # @farmer = Farmer.find(params[:id])
+    @blogs = @farmer.blogs.all
+    @job_offers = @farmer.job_offers.all
   end
 
   def edit
     @farmer = current_farmer
-    # @farmer = Farmer.find(params[:id])
   end
 
   def update
@@ -23,6 +23,6 @@ class Farmer::FarmersController < ApplicationController
 private
 
   def farmer_params
-    params.require(:farmer).permit(:first_name, :last_name, :kana_first_name, :kana_last_name, :postal_code, :residence, :phone_number, :email, :is_valid)
+    params.require(:farmer).permit(:first_name, :last_name, :kana_first_name, :kana_last_name, :postal_code, :residence, :phone_number, :email, :image, :introduction,  :is_valid)
   end
 end

@@ -1,0 +1,17 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  title: MyText
+  image_id: MyString
+  explanation: MyText
+  user_id: 1
+  farmer_id: 1
+  rate: 1.5
+
+two:
+  title: MyText
+  image_id: MyString
+  explanation: MyText
+  user_id: 1
+  farmer_id: 1
+  rate: 1.5

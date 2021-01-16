@@ -6,7 +6,7 @@
     <%= csp_meta_tag %>
 
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
-    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_include_tag 'application' %>
   </head>
 
   <body>
@@ -29,7 +29,7 @@
         TOP
       </li>
       <li>
-        <%= link_to "求人一覧", job_offers_path %>
+        <%= link_to "求人一覧", farmers_job_offers_path %>
       </li>
       <li>
         <%= link_to "農業者マイページ", farmer_path(current_farmer.id) %>

@@ -5,32 +5,82 @@
 		</h2>
   <div class="clearfix job_offer-box">
     <table class="table">
-
-      <thead>
-        <tr>
-          <td>求人名</td>
-          <td>説明</td>
-          <td>報酬</td>
-          <td>ジャンル</td>
-          <td>ステータス</td>
-          <td>農業者</td>
-        </tr>
-      </thead>
-      <tbody>
+     <thead>
+      <tr>
+        <td>求人名</td>
+        <td>説明</td>
+        <td>報酬</td>
+        <td>ジャンル</td>
+        <td>ステータス</td>
+        <td>農業者</td>
+        <td></td>
+      </tr>
+     </thead>
+     <tbody>
       <% @job_offers.each do |job_offer| %>
-        <tr>
-          <td>
-            <%= link_to users_job_offer_path(job_offer) do %>
-              <%= job_offer.title %>
-            <% end %>
-          </td>
-          <td><%= job_offer.explanation %></td>
-          <td><%= job_offer.reward %></td>
-          <td><%= job_offer.genre.name %></td>
-          <td><%= job_offer.is_valid %></td>
-          <td> <%= link_to job_offer.farmer.first_name, users_farmer_path(job_offer.farmer.id) %></td>
-        </tr>
-      <% end %>
+       <tr>
+        <td>
+          <%= link_to users_job_offer_path(job_offer) do %>
+            <%= job_offer.title %>
+          <% end %>
+        </td>
+        <td><%= job_offer.explanation %></td>
+        <td><%= job_offer.reward %></td>
+        <td><%= job_offer.genre.name %></td>
+        <td><%= job_offer.is_valid %></td>
+        <td> <%= link_to job_offer.farmer.first_name, users_farmer_path(job_offer.farmer.id) %></td>
+        <td>
+         <% if job_offer.favorited_by?(current_user) %>
+         <p>
+          <%= link_to users_job_offer_favos_path(job_offer), method: :delete do %>
+           ♥<%= job_offer.favos.count %> いいね
+          <% end %>
+         </p>
+         <% else %>
+         <p>
+          <%= link_to users_job_offer_favos_path(job_offer), method: :post do %>
+           ♡<%= job_offer.favos.count %> いいね
+          <% end %>
+         </p>
+         <% end %>
+        </td>
+        <% end %>
+       </tr>
       </tbody>
     </table>
+
+    <h2>人気求人</h2>
+    <table>
+      <% @all_ranks.each.with_index(1) do |job_offer, i| %>
+      <tr>
+        <td>
+          <%= link_to users_job_offer_path(job_offer) do %>
+            <%= job_offer.title %>
+          <% end %>
+        </td>
+        <td><%= job_offer.explanation %></td>
+        <td><%= job_offer.reward %></td>
+        <td><%= job_offer.genre.name %></td>
+        <td><%= job_offer.is_valid %></td>
+        <td> <%= link_to job_offer.farmer.first_name, users_farmer_path(job_offer.farmer.id) %></td>
+        <td>
+          <% if job_offer.favorited_by?(current_user) %>
+            <p>
+              <%= link_to users_job_offer_favos_path(job_offer), method: :delete do %>
+                ♥<%= job_offer.favos.count %> いいね
+              <% end %>
+            </p>
+          <% else %>
+            <p>
+              <%= link_to users_job_offer_favos_path(job_offer), method: :post do %>
+                ♡<%= job_offer.favos.count %> いいね
+              <% end %>
+            </p>
+          <% end %>
+        </td>
+       </tr>
+      <% end %>
+    </table>
   </div>
+ </div>
+</div>

@@ -9,6 +9,9 @@
  		</p>
 		<table class="table table-bordered table-condensed" >
 			<tbody>
+			  <tr>
+					<td><%= attachment_image_tag @user, :image, :fill, 100, 100, format: 'jpeg', fallback: "no_image.jpg" %></td>
+				</tr>
 				<tr>
 					<td class="info">氏名</td>
 					<td class="text-left"><%= @farmer.first_name %><%= @farmer.last_name %></td>
@@ -35,6 +38,60 @@
 				</tr>
 			</tbody>
 		</table>
+		<h2>ブログ</h2>
+		<% @blogs.each do |blog| %>
+<div>
+  <%= attachment_image_tag blog, :image, fallback: "no_image.jpg", size: '300x300' %>
+  <p>投稿農業者画像：<%#= attachment_image_tag @farmer, :image, :fill, 100, 100, format: 'jpeg', fallback: "no_image.jpg" %></p>
+  <p>タイトル：<%= blog.title %></p>
+  <p>説明：<%= blog.explanation %></p>
+  <p>農業者ネーム：<%= blog.farmer.first_name %></p>
+  <p>投稿日時：<%= blog.created_at.strftime('%Y/%m/%d') %></p>
+
+</div>
+<% end %>
+<h4>求人一覧</h4>
+
+<div class="col-md-12 col-md-offset-1" style="text-align: right;">
+  <%#= link_to new_administrator_job_offer_path, class: "btn btn-info fab-buttons  new_job_offer" do %>
+  <i class ="fas fa-plus" ></i>
+  <%# end %>
+</div>
+<table class="table">
+  <tr></tr>
+  <thead>
+    <tr>
+      <td>求人ID</td>
+      <td>求人名</td>
+      <td>説明</td>
+      <td>報酬</td>
+      <td>ジャンル</td>
+      <td>ステータス</td>
+      <td></td>
+    </tr>
+  </thead>
+  <tbody>
+  <% @job_offers.each do |job_offer| %>
+    <tr>
+      <td>
+        <%= job_offer.id %>
+      </td>
+      <td>
+        <%= link_to farmers_job_offer_path(job_offer) do %>
+          <%= job_offer.title %>
+        <% end %>
+      </td>
+      <td><%= job_offer.explanation %></td>
+      <td><%= job_offer.reward %></td>
+      <td><%= job_offer.genre.name %></td>
+      <td><%= job_offer.is_valid %></td>
+      <td></td>
+    </tr>
+  <% end %>
+  </tbody>
+</table>
+<%= link_to "新規求人を追加", new_farmers_job_offer_path %>
+<%= link_to "募集形態を追加", genres_path %>
 		<%= link_to "農業者一覧", farmers_path %>
 		<%= link_to '投稿フォーム', new_blog_path %>
 	  <%= link_to '投稿一覧', blogs_path %>

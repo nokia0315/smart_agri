@@ -8,6 +8,7 @@ class Farmer::GenresController < ApplicationController
 
   def create
     @genre = Genre.new(genre_params)
+    @genre.farmer = current_farmer
     if @genre.save
       flash[:notice] = "ジャンルを追加しました"
       redirect_to genres_path
@@ -18,9 +19,9 @@ class Farmer::GenresController < ApplicationController
   end
 
   def show
-    @products = Product.all.all#.page(params[:page]).per(10)
+    @job_offers = JobOffer.all.all#.page(params[:page]).per(10)
     @genre = Genre.find(params[:id])
-    @genres = @genre.products.order(created_at: :desc).all#.page(params[:page]).per(5)
+    @genres = @genre.job_offers.order(created_at: :desc).all#.page(params[:page]).per(5)
   end
 
   def edit
@@ -29,13 +30,14 @@ class Farmer::GenresController < ApplicationController
 
   def update
     @genre = Genre.find(params[:id])
+    @genre.farmer = current_farmer
     if @genre.update(genre_params)
       flash[:success] = "ジャンルを変更しました"
       redirect_to genres_path
       # if @genre.is_valid == false
-      # # @genre.products.each do |product|
-      #     product.is_sale = false
-      #     product.save
+      # # @genre.job_offers.each do |job_offer|
+      #     job_offer.is_sale = false
+      #     job_offer.save
       #   #end
       # end
     else

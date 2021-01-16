@@ -1,0 +1,7 @@
+# get 'users/job_offers' => 'job_offers#index'
+    # get 'users/job_offers/:id' => 'job_offers#show',as: 'users_job_offer'
+    # delete 'users/job_offers/:id/favos' => 'favos#destroy'
+    # post 'users/job_offer/:id/favos' => 'favos#create'
+    
+    get 'users/farmers' => 'farmers#index',as: 'users_farmers_index'
+   get 'users/farmers/:id' => 'farmers#show',as: 'users_farmer'

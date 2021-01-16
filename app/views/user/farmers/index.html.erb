@@ -19,12 +19,10 @@
       <td><%#= "フォロー数: #{farmer.follower.count}" %></td>
       <td><%#= "フォロワー数: #{farmer.followed.count}" %></td>
       <td>
-        <%# unless farmer == current_farmer %>
-        <%# if current_farmer.following?(farmer) %>
-        <%#= link_to 'フォロー外す', unfollow_path(farmer.id), method: :POST %>
+        <%# if current_user.following?(farmer) %>
+        <%#= link_to "フォロー外す", users_farmer_relationships_path(farmer.id), method: :delete, class: "btn btn-primary" %>
         <%# else %>
-        <%#= link_to 'フォローする', follow_path(farmer.id), method: :POST %>
-        <%# end %>
+          <%#= link_to "フォローする", users_farmer_relationships_path(farmer.id), method: :post, class: "btn btn-success" %>
         <%# end %>
       </td>
       <td><%= link_to 'Show', users_farmer_path(farmer.id) %></td>

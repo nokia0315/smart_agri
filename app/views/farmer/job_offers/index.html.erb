@@ -10,7 +10,6 @@
   <tr></tr>
   <thead>
     <tr>
-      <td>求人ID</td>
       <td>求人名</td>
       <td>説明</td>
       <td>報酬</td>
@@ -22,10 +21,9 @@
   <tbody>
   <% @job_offers.each do |job_offer| %>
     <tr>
+
       <td>
-        <%= job_offer.id %>
-      <td>
-        <%= link_to job_offer_path(job_offer) do %>
+        <%= link_to farmers_job_offer_path(job_offer) do %>
           <%= job_offer.title %>
         <% end %>
       </td>
@@ -38,5 +36,5 @@
   <% end %>
   </tbody>
 </table>
-<%= link_to "新規求人を追加", new_job_offer_path %>
+<%= link_to "新規求人を追加", new_farmers_job_offer_path %>
 <%= link_to "募集形態を追加", genres_path %>

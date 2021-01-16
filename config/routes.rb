@@ -14,31 +14,11 @@ Rails.application.routes.draw do
     passwords:     'users/passwords',
     registrations: 'users/registrations'
   }
-  scope module: :user do
-    root to: 'job_offers#top'
-    scope :users do
-      resources :job_offers, only: [:index, :show],as: 'users_job_offers' do
-       resource :favos, only: [:create, :destroy]
-      end
-    end
 
-  end
-
-  scope module: :user do
-   get 'users/farmers' => 'farmers#index',as: 'users_farmers_index'
-    resources :users do
-    		collection do
-    	     get 'quit'
-    	     patch 'out'
-    	  end
-    end
-    get 'users/farmers/:id' => 'farmers#show',as: 'users_farmer'
-  end
-
-  scope module: :farmer do
+scope module: :farmer do
     scope :farmers do
-     resources :job_offers
-     resources :genres, only: [:index, :create, :edit, :update, :show]
+     resources :job_offers ,as: 'farmers_job_offers'
+     resources :genres, only: [:index, :create, :edit, :update ]
      resources :blogs, only: [:new, :create, :index, :show, :destroy]
     end
     resources :farmers do
@@ -48,4 +28,29 @@ Rails.application.routes.draw do
     	  end
     end
   end
+
+  scope module: :user do
+    root to: 'job_offers#top'
+    scope :users do
+      resources :job_offers, only: [:index, :show],as: 'users_job_offers' do
+       resource :favos, only: [:create, :destroy]
+      end
+      resources :farmers, only: [:index, :show],as: 'users_farmers' do
+       resource :relationships, only: [:create, :destroy]
+       get 'followings' => 'relationships#followings', as: 'followings'
+       get 'followers' => 'relationships#followers', as: 'followers'
+      end
+      resources :reviews,as: 'users_farmers_reviews'
+    end
+
+
+    resources :users do
+    		collection do
+    	     get 'quit'
+    	     patch 'out'
+    	  end
+    end
+  end
+
+
 end

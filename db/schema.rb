@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_01_15_135908) do
+ActiveRecord::Schema.define(version: 2021_01_16_143650) do
 
   create_table "admins", force: :cascade do |t|
     t.string "email", default: "", null: false
@@ -28,6 +28,7 @@ ActiveRecord::Schema.define(version: 2021_01_15_135908) do
     t.boolean "is_valid", default: false, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "image_id"
     t.index ["email"], name: "index_admins_on_email", unique: true
     t.index ["reset_password_token"], name: "index_admins_on_reset_password_token", unique: true
   end
@@ -57,6 +58,8 @@ ActiveRecord::Schema.define(version: 2021_01_15_135908) do
     t.boolean "is_valid", default: false, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "image_id"
+    t.text "introduction"
     t.index ["email"], name: "index_farmers_on_email", unique: true
     t.index ["reset_password_token"], name: "index_farmers_on_reset_password_token", unique: true
   end
@@ -73,6 +76,7 @@ ActiveRecord::Schema.define(version: 2021_01_15_135908) do
     t.boolean "is_valid", default: true
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "farmer_id"
   end
 
   create_table "job_offers", force: :cascade do |t|
@@ -83,6 +87,24 @@ ActiveRecord::Schema.define(version: 2021_01_15_135908) do
     t.text "reward"
     t.boolean "is_valid"
     t.integer "farmer_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "relationships", force: :cascade do |t|
+    t.integer "follower_id"
+    t.integer "followed_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "reviews", force: :cascade do |t|
+    t.text "title"
+    t.string "image_id"
+    t.text "explanation"
+    t.integer "user_id"
+    t.integer "farmer_id"
+    t.float "rate"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -103,6 +125,8 @@ ActiveRecord::Schema.define(version: 2021_01_15_135908) do
     t.boolean "is_valid", default: false, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "image_id"
+    t.text "introduction"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end

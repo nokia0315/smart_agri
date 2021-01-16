@@ -17,7 +17,7 @@ class Farmer::JobOffersController < ApplicationController
     @job_offer.farmer = current_farmer
      if @job_offer.save!
        flash[:notice] = "新規求人を登録しました"
-       redirect_to job_offer_path(@job_offer)
+       redirect_to farmers_job_offer_path(@job_offer)
      else
        render:new
      end
@@ -40,7 +40,7 @@ class Farmer::JobOffersController < ApplicationController
     job_offer = JobOffer.find(params[:id])
     if job_offer.update(job_offer_params)
      flash[:success] = "求人内容をを変更しました"
-     redirect_to job_offers_path
+     redirect_to farmers_job_offers_path
     else
      render :edit
     end

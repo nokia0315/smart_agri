@@ -8,7 +8,7 @@ class User::JobOffersController < ApplicationController
   def index
         @genres = Genre.all
         @job_offers = JobOffer.all
-
+        @all_ranks = JobOffer.find(Favo.group(:job_offer_id).order('count(job_offer_id) desc').limit(3).pluck(:job_offer_id))
         # def search
         #   @value = params["search"]["value"]         #データを代入
         #   @how = params["search"]["how"]             #データを代入
@@ -25,7 +25,7 @@ class User::JobOffersController < ApplicationController
 	 private
 
     	def job_offer_params
-    		parmas.require(:job_offer).permit(:image_id, :explanation, :title, :is_valid, :farmer_id, :reward, )
+    		params.require(:job_offer).permit(:image_id, :explanation, :title, :is_valid, :farmer_id, :reward, )
     	end
 
       def farmer_params

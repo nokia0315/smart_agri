@@ -3,7 +3,7 @@
 </span>
 <div class="row">
   <div class="col-xs-3 job_offer-index">
-    <%= render "layouts/genre_search", job_offers: @job_offers %>
+    <%#= render "layouts/genre_search", job_offers: @job_offers %>
   </div>
   <div class="col-xs-9 job_offer-index">
       <div class="clearfix job_offer-box">
@@ -11,7 +11,7 @@
           <%= render "user/job_offers/job_offers_each", job_offer: job_offer %>
         <% end %>
       </div>
-     <div class="text-center"><%= paginate(@genres) %></div>
+     <div class="text-center"><%#= paginate(@genres) %></div>
   </div>
 
 </div>
