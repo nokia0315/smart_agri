@@ -12,7 +12,7 @@ Rails.application.routes.draw do
   devise_for :users, controllers: {
     sessions:      'users/sessions',
     passwords:     'users/passwords',
-    registrations: 'users/registrations'
+    registrations: 'users/registrations',
   }
 
 scope module: :farmer do
@@ -39,8 +39,8 @@ scope module: :farmer do
        resource :relationships, only: [:create, :destroy]
        get 'followings' => 'relationships#followings', as: 'followings'
        get 'followers' => 'relationships#followers', as: 'followers'
+       resources :reviews,as: 'reviews'
       end
-      resources :reviews,as: 'users_farmers_reviews'
     end
 
 

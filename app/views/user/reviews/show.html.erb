@@ -1,0 +1,57 @@
+<h4>商品詳細</h4>
+
+<div class="container">
+	<div class="row">
+	  <div class="col-md-4">
+	     <%#= attachment_image_tag @review, :reviews_image, size: "250x250", fallback: "no_image.jpg" %>
+    </div>
+    <div class="col-md-8">
+      <div class="field">
+				<p>
+					タイトル     <%= @review.title %>
+				</p>
+      </div>
+	    <div class="field">
+				<p>
+					説明    <%= @review.explanation %>
+				</p>
+	    </div>
+	    <div class="field">
+				<p>
+				  <%= @review.user.first_name %>
+          <%= @review.created_at.strftime('%Y/%m/%d') %>
+          <h4 class="mb-3">評価：<%= @review.rate %>点 | <%= @review.title %></h4>
+
+          <!--星評価-->
+          <div id="star-rate-<%= @review.id %>"></div>
+           <script>
+                  $('#star-rate-<%= @review.id %>').raty({
+                    size: 36,
+                    starOff:  '<%= asset_path('star-off.png') %>',
+                    starOn : '<%= asset_path('star-on.png') %>',
+                    starHalf: '<%= asset_path('star-half.png') %>',
+                    half: true,
+                    readOnly: true,
+                    score: <%= @review.rate %>,
+                  });
+           </script>
+          <!--/星評価-->
+				</p>
+	    </div>
+	    <div class="field">
+				<p>
+				</p>
+	    </div>
+	    <div class="field">
+				<p>
+
+				</p>
+	    </div>
+      <div class="actions col-md-9">
+      	<%= link_to "編集する", edit_users_farmer_review_path(@review), class: "glyphicon glyphicon-pencil btn btn-success pull-right" %>
+    	  <%= link_to "一覧に戻る", users_farmer_path(@farmer), class: "glyphicon glyphicon-pencil btn btn-success pull-right" %>
+        <%= link_to "削除する", users_farmer_review_path(@review.farmer, @review), method: :delete, "data-confirm" => "Are you sure？", class: 'btn btn-sm btn-danger' %>
+      </div>
+  	</div>
+	</div>
+</div>

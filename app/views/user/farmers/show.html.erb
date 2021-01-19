@@ -47,7 +47,7 @@
 
 </div>
 <% end %>
-<h4>求人一覧</h4>
+<h4><%= @farmer.first_name %><%= @farmer.last_name %>さんの求人一覧</h4>
 
 <div class="col-md-12 col-md-offset-1" style="text-align: right;">
   <%#= link_to new_administrator_job_offer_path, class: "btn btn-info fab-buttons  new_job_offer" do %>
@@ -83,6 +83,33 @@
   <% end %>
   </tbody>
 </table>
-		<%= link_to "農業者一覧", users_farmers_path %>
-    <%= link_to "レビュー投稿", new_users_farmers_review_path %>
+<div class="reviews">
+<h4><%= @farmer.first_name %><%= @farmer.last_name %>さんのレビュー一覧</h4>
+<p>レビュー件数：<%= @farmer.reviews.count %></p>
+<% @farmer.reviews.each do |review| %>
+ <%= link_to users_farmer_review_path(users_farmer_id: @farmer.id, id: review.id) do %>
+  <p><%= attachment_image_tag review.user, :image, :fill, 100, 100, format: 'jpeg', fallback: "no_image.jpg" %></p>
+  <%= review.user.first_name %>
+  <%= review.created_at.strftime('%Y/%m/%d') %>
+  <h4 class="mb-3">評価：<%= review.rate %>点 | <%= review.title %></h4>
+  <% end %>
+  <!--星評価-->
+  <div id="star-rate-<%= review.id %>"></div>
+   <script>
+          $('#star-rate-<%= review.id %>').raty({
+            size: 36,
+            starOff:  '<%= asset_path('star-off.png') %>',
+            starOn : '<%= asset_path('star-on.png') %>',
+            starHalf: '<%= asset_path('star-half.png') %>',
+            half: true,
+            readOnly: true,
+            score: <%= review.rate %>,
+          });
+   </script>
+  <!--/星評価-->
+<% end %>
+</div>
+
+<%= link_to "農業者一覧", users_farmers_path %>
+<%= link_to "レビュー投稿", new_users_farmer_review_path(@farmer) %>
 

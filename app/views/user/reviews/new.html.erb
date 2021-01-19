@@ -1,12 +1,12 @@
 <!-- 口コミ入力フォーム -->
 
-<%= form_with model: @review, :url => users_farmers_reviews_path, local:true do |f| %>
+<%= form_with model: @review, :url => users_farmer_reviews_path, local:true do |f| %>
 
   <!--エラーメッセージ-->
   <%#= render 'layouts/error_messages', model: f.object %>
 
-  <!--商品コードの送信-->
-  <%#= f.hidden_field :farmer_id, { value: farmer.id} %>
+  <!--農業者コードの送信-->
+  <%#= f.hidden_field :@farmer %>
 
   <!-- タイトル -->
   <div class="form-group row">
