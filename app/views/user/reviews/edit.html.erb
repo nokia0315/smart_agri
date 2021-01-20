@@ -1,8 +1,5 @@
 <!-- 口コミ入力フォーム -->
-<%#= form_for(@review, :url => users_farmer_review_path(@review)) do |f| %>
-
 <%= form_with model: @review, :url => users_farmer_review_path(@review), local:true do |f| %>
-<%= @review.inspect %>
   <!--エラーメッセージ-->
   <%#= render 'layouts/error_messages', model: f.object %>
 

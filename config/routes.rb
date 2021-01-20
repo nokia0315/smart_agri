@@ -1,4 +1,7 @@
 Rails.application.routes.draw do
+  get 'contact/index'
+  get 'contact/confirm'
+  get 'contact/thanks'
   devise_for :admins, controllers: {
     sessions:      'admins/sessions',
     passwords:     'admins/passwords',
@@ -39,7 +42,7 @@ scope module: :farmer do
        resource :relationships, only: [:create, :destroy]
        get 'followings' => 'relationships#followings', as: 'followings'
        get 'followers' => 'relationships#followers', as: 'followers'
-       resources :reviews,as: 'reviews'
+       resources :reviews, as: 'reviews'
       end
     end
 
@@ -51,6 +54,10 @@ scope module: :farmer do
     	  end
     end
   end
+# お問い合わせ
+  get   'contact'         => 'contact#index'     # 入力画面
+  post  'contact/confirm' => 'contact#confirm'   # 確認画面
+  post  'contact/thanks'  => 'contact#thanks'    # 送信完了画面
 
 
 end
