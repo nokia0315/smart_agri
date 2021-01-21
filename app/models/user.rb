@@ -2,10 +2,19 @@ class User < ApplicationRecord
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
-         :recoverable, :rememberable, :validatable, :omniauthable
+         :recoverable, :rememberable, :validatable, :omniauthable, omniauth_providers: %i[google_oauth2]
   has_many :favos, dependent: :destroy
   has_many :reviews, dependent: :destroy
   attachment :image
+
+  def self.from_omniauth(auth)
+      where(provider: auth.provider, uid: auth.uid).first_or_create do |user|
+        # deviseのuserカラムに name を追加している場合は以下のコメントアウトも追記します
+        # user.name = auth.info.name
+        user.email = auth.info.email
+        user.password = Devise.friendly_token[0,20]
+      end
+  end
 
   # # 自分がフォローされる（被フォロー）側の関係性
   # has_many :reverse_of_relationships, class_name: "Relationship", foreign_key: "followed_id", dependent: :destroy
