@@ -85,8 +85,11 @@
 </table>
 <div class="reviews">
 <h4><%= @farmer.first_name %><%= @farmer.last_name %>さんのレビュー一覧</h4>
-<p>レビュー件数：<%= @farmer.reviews.count %></p>
-<% @farmer.reviews.each do |review| %>
+ページ:<%= @reviews.current_page %> / <%= @reviews.total_pages %><br>
+<%= @reviews.total_count %>件中<%= @reviews.offset_value %>
+〜<%= @reviews.offset_value + @reviews.length %>件を表示しています。
+<p>レビュー件数：<%= @reviews.total_count %></p>
+<% @reviews.each do |review| %>
  <%= link_to users_farmer_review_path(users_farmer_id: @farmer.id, id: review.id) do %>
   <p><%= attachment_image_tag review.user, :image, :fill, 100, 100, format: 'jpeg', fallback: "no_image.jpg" %></p>
   <%= review.user.first_name %>
@@ -108,6 +111,7 @@
    </script>
   <!--/星評価-->
 <% end %>
+<%= paginate @reviews %>
 </div>
 
 <%= link_to "農業者一覧", users_farmers_path %>
