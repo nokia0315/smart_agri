@@ -3,7 +3,7 @@ class Farmer::GenresController < ApplicationController
 
   def index
     @genre = Genre.new
-    @genres = Genre.all#.page(params[:page]).per(10)
+    @genres = Genre.all # .page(params[:page]).per(10)
   end
 
   def create
@@ -13,15 +13,15 @@ class Farmer::GenresController < ApplicationController
       flash[:notice] = "ジャンルを追加しました"
       redirect_to genres_path
     else
-      @genres = Genre.all#.page(params[:page]).per(10)
-      render :index and return
+      @genres = Genre.all # .page(params[:page]).per(10)
+      render(:index) && return
     end
   end
 
   def show
-    @job_offers = JobOffer.all.all#.page(params[:page]).per(10)
+    @job_offers = JobOffer.all.all # .page(params[:page]).per(10)
     @genre = Genre.find(params[:id])
-    @genres = @genre.job_offers.order(created_at: :desc).all#.page(params[:page]).per(5)
+    @genres = @genre.job_offers.order(created_at: :desc).all # .page(params[:page]).per(5)
   end
 
   def edit
@@ -41,7 +41,7 @@ class Farmer::GenresController < ApplicationController
       #   #end
       # end
     else
-      render :edit and return
+      render(:edit) && return
     end
   end
 

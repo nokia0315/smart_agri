@@ -16,7 +16,7 @@ class ContactController < ApplicationController
   end
 
   def thanks
-    @contact = Contact.new(params[:contact].permit(:name, :email, :message))    
+    @contact = Contact.new(params[:contact].permit(:name, :email, :message))
     ContactMailer.received_email(@contact).deliver
 
     # 完了画面を表示

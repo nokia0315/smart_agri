@@ -22,10 +22,10 @@ class User::ReviewsController < ApplicationController
   def update
     review = Review.find(params[:id])
     if review.update(review_params)
-     flash[:success] = "レビュー内容をを変更しました"
-     redirect_to users_farmer_review_path(review)
+      flash[:success] = "レビュー内容をを変更しました"
+      redirect_to users_farmer_review_path(review)
     else
-     render :edit
+      render :edit
     end
   end
 
@@ -35,7 +35,8 @@ class User::ReviewsController < ApplicationController
   end
 
   private
-    def review_params
-      params.require(:review).permit(:title, :rate, :image_id, :explanation, :farmer_id, :user_id)
-    end
+
+  def review_params
+    params.require(:review).permit(:title, :rate, :image_id, :explanation, :farmer_id, :user_id)
+  end
 end

@@ -8,7 +8,6 @@ class User::UsersController < ApplicationController
   def quit
   end
 
-
   def out
     @user = current_user
     @user.update(is_valid: true)

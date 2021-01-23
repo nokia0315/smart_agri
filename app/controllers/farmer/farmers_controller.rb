@@ -20,9 +20,9 @@ class Farmer::FarmersController < ApplicationController
     redirect_to farmer_path(@farmer.id)
   end
 
-private
+  private
 
   def farmer_params
-    params.require(:farmer).permit(:first_name, :last_name, :kana_first_name, :kana_last_name, :postal_code, :residence, :phone_number, :email, :image, :introduction,  :is_valid)
+    params.require(:farmer).permit(:first_name, :last_name, :kana_first_name, :kana_last_name, :postal_code, :residence, :phone_number, :email, :image, :introduction, :is_valid)
   end
 end

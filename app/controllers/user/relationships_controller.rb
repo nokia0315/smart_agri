@@ -12,12 +12,12 @@ class User::RelationshipsController < ApplicationController
   end
 
   def followings
-     farmer = Farmer.find(params[:farmer_id])
-     @farmers = user.followings
+    farmer = Farmer.find(params[:farmer_id])
+    @farmers = user.followings
   end
 
   def followers
-     farmer = Farmer.find(params[:farmer_id])
-     @farmers = user.followers
+    farmer = Farmer.find(params[:farmer_id])
+    @farmers = user.followers
   end
 end

@@ -15,5 +15,4 @@ class ContactControllerTest < ActionDispatch::IntegrationTest
     get contact_thanks_url
     assert_response :success
   end
-
 end
