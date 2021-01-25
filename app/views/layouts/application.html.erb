@@ -1,95 +1,130 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Smartagri</title>
+    <title>SmartAgri</title>
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
-
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <script src="https://kit.fontawesome.com/72510f58ad.js" crossorigin="anonymous"></script>
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application' %>
   </head>
 
-  <body>
-    <header>
-      <% if user_signed_in? %>
-      <li>
-        <%= link_to "TOP", "/" %>
-      </li>
-      <li>
-        <%= link_to "求人一覧", users_job_offers_path %>
-      </li>
-      <li>
-        <%= link_to "マイページ", user_path(current_user.id) %>
-      </li>
-      <li>
-        <%= link_to "ログアウト", destroy_user_session_path, method: :delete %>
-      </li>
-    <% elsif farmer_signed_in? %>
-      <li>
-        TOP
-      </li>
-      <li>
-        <%= link_to "求人一覧", farmers_job_offers_path %>
-      </li>
-      <li>
-        <%= link_to "農業者マイページ", farmer_path(current_farmer.id) %>
-      </li>
-      <li>
-        <%= link_to "ログアウト", destroy_farmer_session_path, method: :delete %>
-      </li>
-    <% elsif admin_signed_in? %>
-      <li>
-        TOP
-      </li>
-      <li>
-        求人一覧
-      </li>
-      <li>
-        農業者一覧
-      </li>
-      <li>
-        会員一覧
-      </li>
-      <li>
-        ジャンル一覧
-      </li>
-      <li>
-        管理者一覧
-      </li>
-      <li>
-        <%= link_to "ログアウト", destroy_admin_session_path, method: :delete %>
-      </li>
-    <% else %>
-      <li>
-        <%= link_to "新規会員登録", new_user_registration_path %>
-      </li>
-      <li>
-        <%= link_to "会員ログイン", new_user_session_path %>
-      </li>
-      <li>
-        <%= link_to "新規農業者登録", new_farmer_registration_path %>
-      </li>
-      <li>
-        <%= link_to "農業者ログイン", new_farmer_session_path %>
-      </li>
-      <li>
-        <%= link_to "新規管理者登録", new_admin_registration_path %>
-      </li>
-      <li>
-        <%= link_to "管理者ログイン", new_admin_session_path %>
-      </li>
-
-    <% end %>
+  <body class="d-flex flex-column vh-100">
+    <header class="shadow-sm">
+      <nav class="navbar navbar-expand-lg navbar-light">
+        <div class="container">
+          <a class="navbar-brand p-3" href="/">
+           <%= link_to "Smart Agri", root_path, class: "fas fa-birthday-cake" %>
+          </a>
+          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarNavDropdown">
+            <ul class="navbar-nav ml-auto">
+              <% if user_signed_in? %>
+                <li>
+                  <%= link_to "TOP", "/", class: 'btn btn-outline-danger' %>
+                </li>
+                <li>
+                  <%= link_to "求人一覧", users_job_offers_path, class: 'btn btn-outline-danger' %>
+                </li>
+                <li>
+                  <%= link_to "マイページ", user_path(current_user.id), class: 'btn btn-outline-danger' %>
+                </li>
+                <li>
+                  <%= link_to "ログアウト", destroy_user_session_path, method: :delete, class: 'btn btn-outline-dark' %>
+                </li>
+              <% elsif farmer_signed_in? %>
+                <li>
+                  TOP
+                </li>
+                <li>
+                  <%= link_to "求人一覧", farmers_job_offers_path, class: 'btn btn-outline-danger' %>
+                </li>
+                <li>
+                  <%= link_to "農業者マイページ", farmer_path(current_farmer.id), class: 'btn btn-outline-danger' %>
+                </li>
+                <li>
+                  <%= link_to "ログアウト", destroy_farmer_session_path, method: :delete %>
+                </li>
+              <% elsif admin_signed_in? %>
+                <li>
+                  TOP
+                </li>
+                <li>
+                  求人一覧
+                </li>
+                <li>
+                  農業者一覧
+                </li>
+                <li>
+                  会員一覧
+                </li>
+                <li>
+                  ジャンル一覧
+                </li>
+                <li>
+                  管理者一覧
+                </li>
+                <li>
+                  <%= link_to "ログアウト", destroy_admin_session_path, method: :delete %>
+                </li>
+              <% else %>
+                <li>
+                  <%= link_to "新規会員登録", new_user_registration_path %>
+                </li>
+                <li>
+                  <%= link_to "会員ログイン", new_user_session_path %>
+                </li>
+                <li>
+                  <%= link_to "新規農業者登録", new_farmer_registration_path %>
+                </li>
+                <li>
+                  <%= link_to "農業者ログイン", new_farmer_session_path %>
+                </li>
+                <li>
+                  <%= link_to "新規管理者登録", new_admin_registration_path %>
+                </li>
+                <li>
+                  <%= link_to "管理者ログイン", new_admin_session_path %>
+                </li>
+              <% end %>
+            </ul>
+          </div>
+        </div>
+       </nav>
     </header>
-    <div id="flash">
-        <%= render "layouts/flash" %>
-      </div>
-    <%= yield %>
 
-    <footer>
-      <li>
-        <%= link_to "お問い合わせ", contact_path %>
-      </li>
+    <div id="flash">
+      <%= render "layouts/flash" %>
+    </div>
+
+    <main class="mb-auto">
+      <div class="container">
+        <%= yield %>
+      </div>
+    </main>
+
+    <footer class="bg-dark text-white pt-5 pb-4">
+      <div class="container">
+        <div class="row no-gutters">
+          <div class="col-md-4">
+            <h2>logo</h2>
+          </div>
+          <div class="col-md-8">
+            <h6 class="text-white mt-2 mb-3"><%= link_to "お問い合わせ", contact_path %></h6>
+            <ul class="p-0 list-unstyled">
+              <li>
+                <a href="" title="About" class="text-white-50">会社概要</a>
+              </li>
+              <li>
+                <a href="" title="License informations" class="text-white-50">プライバシーポリシー</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
     </footer>
   </body>
 </html>

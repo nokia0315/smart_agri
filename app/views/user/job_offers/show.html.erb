@@ -1,35 +1,51 @@
-<div class="container">
 	<div class="row">
 	  <div class="col-md-4">
-	     <%#= attachment_image_tag @job_offer, :job_offers_image, size: "250x250", fallback: "no_image.jpg" %>
+	     <%= attachment_image_tag @job_offer, :image_id, size: "250x250", fallback: "no_image.jpg" %>
     </div>
     <div class="col-md-8">
-      <div class="field">
-				<p>
-					タイトル     <%= @job_offer.title %>
-				</p>
-      </div>
-	    <div class="field">
-				<p>
-					説明    <%= @job_offer.explanation %>
-				</p>
-	    </div>
-	    <div class="field">
-				<p>
-					報酬    <%= @job_offer.reward %>
-				</p>
-	    </div>
+    	<table class="table">
+    		<tr>
+    			<th>
+    				タイトル
+    			</th>
+    			<td>
+    				<%= @job_offer.title %>
+    			</td>
+    		</tr>
+    		<tr>
+    			<th>
+    				説明
+    			</th>
+    			<td>
+    				<%= @job_offer.explanation %>
+    			</td>
+    		</tr>
+    		<tr>
+    			<th>
+    				報酬
+    			</th>
+    			<td>
+    				<%= @job_offer.reward %>
+    			</td>
+    		</tr>
+    		<tr>
+    			<th>
+    				募集状況
+    			</th>
+    			<td>
+    				<%= @job_offer.is_valid %>
+    			</td>
+    		</tr>
+    		<tr>
+    			<th>
+    				農業者
+    			</th>
+    			<td>
+    				<%= link_to @job_offer.farmer.first_name, users_farmer_path(@job_offer.farmer.id) %>
+    			</td>
+    		</tr>
+    	</table>
 
-	    <div class="field">
-				<p>
-					販売ステータス     <%= @job_offer.is_valid %>
-				</p>
-	    </div>
-	    <div class="field">
-				<p>
-					農業者          <%= link_to @job_offer.farmer.first_name, users_farmer_path(@job_offer.farmer.id) %>
-				</p>
-	    </div>
 	    <% if @job_offer.favorited_by?(current_user) %>
     <p>
       <%= link_to users_job_offer_favos_path(@job_offer), method: :delete do %>
