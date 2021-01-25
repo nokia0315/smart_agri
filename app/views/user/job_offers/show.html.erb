@@ -3,6 +3,7 @@
 	     <%= attachment_image_tag @job_offer, :image_id, size: "250x250", fallback: "no_image.jpg" %>
     </div>
     <div class="col-md-8">
+    	<h2 class="job_offer-headline head-line title_h2 text-center">求人詳細</h2><br>
     	<table class="table">
     		<tr>
     			<th>
@@ -45,22 +46,24 @@
     			</td>
     		</tr>
     	</table>
-
-	    <% if @job_offer.favorited_by?(current_user) %>
-    <p>
+      <div class="col-md-12 text-center">
+      	<% if @job_offer.favorited_by?(current_user) %>
+       <p>
       <%= link_to users_job_offer_favos_path(@job_offer), method: :delete do %>
-        ♥<%= @job_offer.favos.count %> いいね
+        ♥<%= @job_offer.favos.count %> キープ
       <% end %>
-    </p>
-    <% else %>
-    <p>
+       </p>
+      <% else %>
+       <p>
       <%= link_to users_job_offer_favos_path(@job_offer), method: :post do %>
-        ♡<%= @job_offer.favos.count %> いいね
+        ♡<%= @job_offer.favos.count %> キープ
       <% end %>
-    </p>
-  <% end %>
-      <div class="actions col-md-9">
-    	  <%= link_to "一覧に戻る", users_job_offers_path, class: "glyphicon glyphicon-pencil btn btn-success pull-right" %>
+       </p>
+      <% end %>
+      </div>
+
+      <div class="col-md-12 text-right">
+    	  <%= link_to "一覧に戻る", users_job_offers_path, class: "glyphicon glyphicon-pencil btn btn-success" %>
       </div>
   	</div>
 	</div>

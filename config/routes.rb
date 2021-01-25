@@ -46,7 +46,9 @@ Rails.application.routes.draw do
         get 'followings' => 'relationships#followings', as: 'followings'
         get 'followers' => 'relationships#followers', as: 'followers'
         resources :reviews, as: 'reviews'
+        get 'blogs/:id' => 'blogs#show', as: 'blog'
       end
+
     end
 
     resources :users do

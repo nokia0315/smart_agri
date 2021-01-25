@@ -1,68 +1,56 @@
 <div class="row">
-	<div class="col-xs-offset-1 col-xs-8">
-		<h2 class="head-line text-center title_h2"><%= @farmer.first_name %><%= @farmer.last_name %>さんのプロフィール</h2>
-		<p><strong class="information-link"><i class="far fa-farmer"></i>登録情報</strong><br>
- 		</p>
-		<table class="table table-bordered table-condensed" >
-			<tbody>
-				<tr>
-					<td class="info">氏名</td>
-					<td class="text-left"><%= @farmer.first_name %><%= @farmer.last_name %></td>
-				</tr>
-				<tr>
-					<td class="info">カナ</td>
-					<td class="text-left"><%= @farmer.kana_first_name %><%= @farmer.kana_last_name %></td>
-				</tr>
-				<tr>
-					<td class="info">郵便番号</td>
-					<td class="text-left"><%= @farmer.postal_code %></td>
-				</tr>
-				<tr>
-					<td class="info">住所</td>
-					<td class="text-left"><%= @farmer.residence %></td>
-				</tr>
-				<tr>
-					<td class="info">電話番号</td>
-					<td class="text-left"><%= @farmer.phone_number %></td>
-				</tr>
-				<tr>
-					<td class="info">メールアドレス</td>
-					<td class="text-left"><%= @farmer.email %></td>
-				</tr>
-				<tr>
-					<td class="info">自己紹介</td>
-					<td class="text-left"><%= @farmer.introduction %></td>
-				</tr>
-			</tbody>
-		</table>
-      <h2>ブログ</h2>
+	<div class="col-md-8">
+		<br><br><h2 class="head-line title_h2"><%= @farmer.first_name %><%= @farmer.last_name %>さんのプロフィール<i class="far fa-user"></i></h2>
+    <p><%= attachment_image_tag @farmer, :image, fallback: "no_image.jpg", size: '250x250' %></p>
+	</div>
+	<div class="col-md-4"><br><br>
+    <h3 class="head-line title_h3">レビュー件数&nbsp&nbsp&nbsp<%= @reviews.total_count %></h3><br>
+    <h3 class="head-line title_h3">自己紹介</h3><br>
+    <p><%= @farmer.introduction %></p>
+	</div>
+	<div class="col-md-12">
+	  <table class="table table-bordered table-condensed" >
+  	 <tbody>
+  		<tr>
+  			<td class="info">住所</td>
+  			<td class="text-left"><%= @farmer.residence %></td>
+  		</tr>
+  		<tr>
+  			<td class="info">電話番号</td>
+  			<td class="text-left"><%= @farmer.phone_number %></td>
+  		</tr>
+  		<tr>
+  			<td class="info">メールアドレス</td>
+  			<td class="text-left"><%= @farmer.email %></td>
+  		</tr>
+  	 </tbody>
+   </table>
+	</div>
+<br><br><br>
+  <div class="col-md-12">
+   <br><br><h2 class="job_offer-headline head-line title_h2 text-center">ブログ</h2><br><br>
+   <div class="blog">
 		<% @blogs.each do |blog| %>
-<div>
-  <%= attachment_image_tag blog, :image, fallback: "no_image.jpg", size: '300x300' %>
-  <p>投稿農業者画像：<%#= link_to users_farmer_path(blog.farmer.id) do %><%#= attachment_image_tag blog.farmer, :image, :fill, 40, 40, fallback: "no_image.jpg", size: '40x40' %><%# end %></p>
-  <p>タイトル：<%= blog.title %></p>
-  <p>説明：<%= blog.explanation %></p>
-  <p>農業者ネーム：<%= blog.farmer.first_name %></p>
-  <p>投稿日時：<%= blog.created_at.strftime('%Y/%m/%d') %></p>
+		 <%= link_to users_farmer_blog_path(users_farmer_id: @farmer.id, id: blog.id) do %>
+     <%= attachment_image_tag blog, :image, fallback: "no_image.jpg", size: '200x200' %>
+     <% end %>
+    <p>タイトル：<%= blog.title %></p>
+    <p>投稿日時：<%= blog.created_at.strftime('%Y/%m/%d') %></p>
+    <% end %>
+    <%= paginate @blogs, theme: 'twitter-bootstrap-4', class: "text-center" %>
+   </div>
+ </div>
 
-</div>
-<% end %>
-<h4><%= @farmer.first_name %><%= @farmer.last_name %>さんの求人一覧</h4>
-
-<div class="col-md-12 col-md-offset-1" style="text-align: right;">
-  <%#= link_to new_administrator_job_offer_path, class: "btn btn-info fab-buttons  new_job_offer" do %>
-  <i class ="fas fa-plus" ></i>
-  <%# end %>
-</div>
-<table class="table">
+ <div class="col-md-12 text-center">
+  <br><br><h4 class="job_offer-headline head-line title_h4 text-center"><%= @farmer.first_name %><%= @farmer.last_name %>さんの求人一覧</h4><br><br>
+ <table class="table">
   <tr></tr>
   <thead>
     <tr>
       <td>求人名</td>
-      <td>説明</td>
       <td>報酬</td>
-      <td>ジャンル</td>
-      <td>ステータス</td>
+      <td>募集形態</td>
+      <td>募集状況</td>
       <td></td>
     </tr>
   </thead>
@@ -74,7 +62,6 @@
           <%= job_offer.title %>
         <% end %>
       </td>
-      <td><%= job_offer.explanation %></td>
       <td><%= job_offer.reward %></td>
       <td><%= job_offer.genre.name %></td>
       <td><%= job_offer.is_valid %></td>
@@ -82,22 +69,26 @@
     </tr>
   <% end %>
   </tbody>
-</table>
+ </table>
+  <%= paginate @job_offers, theme: 'twitter-bootstrap-4', class: "text-center" %>
+</div>
+<div class="col-md-12">
+ <br><br><h4 class="job_offer-headline head-line title_h4 text-center"><%= @farmer.first_name %><%= @farmer.last_name %>さんのレビュー一覧</h4><br><br>
+ <p class="text-center">ページ:<%= @reviews.current_page %> / <%= @reviews.total_pages %><br>
+ <%= @reviews.total_count %>件中<%= @reviews.offset_value %>
+ 〜<%= @reviews.offset_value + @reviews.length %>件を表示しています。</p>
+ <p>レビュー件数：<%= @reviews.total_count %></p>
 <div class="reviews">
-<h4><%= @farmer.first_name %><%= @farmer.last_name %>さんのレビュー一覧</h4>
-ページ:<%= @reviews.current_page %> / <%= @reviews.total_pages %><br>
-<%= @reviews.total_count %>件中<%= @reviews.offset_value %>
-〜<%= @reviews.offset_value + @reviews.length %>件を表示しています。
-<p>レビュー件数：<%= @reviews.total_count %></p>
 <% @reviews.each do |review| %>
  <%= link_to users_farmer_review_path(users_farmer_id: @farmer.id, id: review.id) do %>
   <p><%= attachment_image_tag review.user, :image, :fill, 100, 100, format: 'jpeg', fallback: "no_image.jpg" %></p>
   <%= review.user.first_name %>
-  <%= review.created_at.strftime('%Y/%m/%d') %>
-  <h4 class="mb-3">評価：<%= review.rate %>点 | <%= review.title %></h4>
+  <%= review.created_at.strftime('%Y/%m/%d') %><br>
+  <b class="mb-3">評価：<%= review.rate %>点 | <%= review.title %></b>
   <% end %>
   <!--星評価-->
-  <div id="star-rate-<%= review.id %>"></div>
+  <div class="rate-star">
+    <div id="star-rate-<%= review.id %>"></div>
    <script>
           $('#star-rate-<%= review.id %>').raty({
             size: 36,
@@ -109,11 +100,17 @@
             score: <%= review.rate %>,
           });
    </script>
+  </div>
+
   <!--/星評価-->
 <% end %>
-<%= paginate @reviews %>
+</div>
+ <div class="text-center">
+  <%= paginate @reviews, theme: 'twitter-bootstrap-4', class: "text-center" %>
+  <%= link_to "求人一覧", users_job_offers_path, class: "glyphicon glyphicon-shopping-cart btn-lg btn-info" %>
+  <%= link_to "レビュー投稿", new_users_farmer_review_path(@farmer), class: "glyphicon glyphicon-pencil btn-lg btn-success center-block" %><br><br>
+ </div>
 </div>
 
-<%= link_to "農業者一覧", users_farmers_path %>
-<%= link_to "レビュー投稿", new_users_farmer_review_path(@farmer) %>
+
 

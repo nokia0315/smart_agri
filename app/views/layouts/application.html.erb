@@ -24,26 +24,26 @@
             <ul class="navbar-nav ml-auto">
               <% if user_signed_in? %>
                 <li>
-                  <%= link_to "TOP", "/", class: 'btn btn-outline-danger' %>
+                  <%= link_to "TOP", "/", class: 'btn btn-outline-success fas fa-laptop-house' %>
                 </li>
                 <li>
-                  <%= link_to "求人一覧", users_job_offers_path, class: 'btn btn-outline-danger' %>
+                  <%= link_to "求人一覧", users_job_offers_path, class: 'btn btn-outline-success fas fa-indent' %>
                 </li>
                 <li>
-                  <%= link_to "マイページ", user_path(current_user.id), class: 'btn btn-outline-danger' %>
+                  <%= link_to "マイページ", user_path(current_user.id), class: 'btn btn-outline-success fas fa-house-user' %>
                 </li>
                 <li>
-                  <%= link_to "ログアウト", destroy_user_session_path, method: :delete, class: 'btn btn-outline-dark' %>
+                  <%= link_to "ログアウト", destroy_user_session_path, method: :delete, class: 'btn btn-outline-dark fas fa-sign-out-alt' %>
                 </li>
               <% elsif farmer_signed_in? %>
                 <li>
                   TOP
                 </li>
                 <li>
-                  <%= link_to "求人一覧", farmers_job_offers_path, class: 'btn btn-outline-danger' %>
+                  <%= link_to "求人一覧", farmers_job_offers_path, class: 'btn btn-outline-success' %>
                 </li>
                 <li>
-                  <%= link_to "農業者マイページ", farmer_path(current_farmer.id), class: 'btn btn-outline-danger' %>
+                  <%= link_to "農業者マイページ", farmer_path(current_farmer.id), class: 'btn btn-outline-success' %>
                 </li>
                 <li>
                   <%= link_to "ログアウト", destroy_farmer_session_path, method: :delete %>
@@ -106,7 +106,7 @@
       </div>
     </main>
 
-    <footer class="bg-dark text-white pt-5 pb-4">
+    <footer class="bg-dark text-white pt-3 pb-4">
       <div class="container">
         <div class="row no-gutters">
           <div class="col-md-4">

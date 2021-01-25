@@ -6,8 +6,8 @@ class User::FarmersController < ApplicationController
   def show
     @farmer = Farmer.find(params[:id])
     @reviews = @farmer.reviews.page(params[:page]).per(5)
-    @blogs = @farmer.blogs.all
-    @job_offers = @farmer.job_offers.all
+    @blogs = @farmer.blogs.page(params[:page]).per(5)
+    @job_offers = @farmer.job_offers.page(params[:page]).per(5)
   end
 
   private

@@ -16,3 +16,29 @@
 @import "bootstrap";
 @import 'font-awesome-sprockets';
 @import 'font-awesome';
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  // color: #6c6b6b;
+}
+
+header {
+  margin-bottom: 15px;
+}
+
+footer {
+  margin-top: 15px;
+}
+
+.reviews,.blogs{
+  display: flex;
+  margin: 5px;
+  padding: 10px;
+  background-color: #ffffff;
+}
+
+.rate-star{
+  display: inline-block;
+}
