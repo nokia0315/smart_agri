@@ -23,7 +23,9 @@ class Farmer::JobOffersController < ApplicationController
   end
 
   def index
-    @job_offers = JobOffer.all
+    @genres = Genre.all
+    @job_offers = JobOffer.page(params[:page]).per(5)
+    @all_ranks = JobOffer.find(Favo.group(:job_offer_id).order('count(job_offer_id) desc').limit(3).pluck(:job_offer_id))
   end
 
   def show

@@ -6,6 +6,36 @@
   <i class ="fas fa-plus" ></i>
   <%# end %>
 </div>
+
+<div class="name-search">
+  <% if farmer_signed_in? %>                         #deviseのヘルパーメソッドです、省いても問題ありません。
+    <h5>求人名検索</h5>
+    <%= form_with url: search_search_path, method: :get, local: true do |f| %>
+      <%= f.text_field 'search[value]', size: "26x4" %><br>
+      <span class="search-button col-xs-12 text-right">
+        <%= f.select 'search[how]', options_for_select({ "部分一致" => "partical", "前方一致" => "forward", "後方一致" => "backward", "完全一致" => "match" }) %>
+        <%= f.submit :"検索" %>
+      </span>
+    <% end %>
+  <% end %>
+</div>
+<table class="table table-bordered genre-table">
+    <thead>
+      <tr>
+        <th>ジャンル検索</th>
+      </tr>
+    </thead>
+    <tbody>
+    <% @genres.each do |genre| %>
+      <tr>
+        <td>
+          <%= link_to genre.name, search_search__path('search[value]': genre.id, 'search[how]': "match") %>
+        </td>
+      </tr>
+    <% end %>
+    </tbody>
+</table>
+
 <table class="table">
   <tr></tr>
   <thead>
@@ -19,6 +49,9 @@
     </tr>
   </thead>
   <tbody>
+    ページ:<%= @job_offers.current_page %> / <%= @job_offers.total_pages %><br>
+<%= @job_offers.total_count %>件中<%= @job_offers.offset_value %>
+〜<%= @job_offers.offset_value + @job_offers.length %>件を表示しています。
   <% @job_offers.each do |job_offer| %>
     <tr>
 
@@ -34,6 +67,8 @@
       <td></td>
     </tr>
   <% end %>
+  <%= paginate @job_offers %>
+
   </tbody>
 </table>
 <%= link_to "新規求人を追加", new_farmers_job_offer_path %>

@@ -76,3 +76,7 @@ end
 gem 'omniauth', '1.9.1'
 gem 'omniauth-google-oauth2'
 gem 'kaminari', '~> 1.2.1'
+
+gem 'bootstrap', '~> 4.5'
+gem 'jquery-rails'
+gem 'font-awesome-sass', '~> 5.13'

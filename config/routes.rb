@@ -1,7 +1,4 @@
 Rails.application.routes.draw do
-  get 'contact/index'
-  get 'contact/confirm'
-  get 'contact/thanks'
   devise_for :admins, controllers: {
     sessions: 'admins/sessions',
     passwords: 'admins/passwords',
@@ -18,6 +15,11 @@ Rails.application.routes.draw do
     registrations: 'users/registrations',
     omniauth_callbacks: "users/omniauth_callbacks",
   }
+
+  get 'search/search'
+  get 'contact/index'
+  get 'contact/confirm'
+  get 'contact/thanks'
 
   scope module: :farmer do
     scope :farmers do
