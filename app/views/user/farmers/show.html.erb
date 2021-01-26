@@ -4,9 +4,13 @@
     <p><%= attachment_image_tag @farmer, :image, fallback: "no_image.jpg", size: '250x250' %></p>
 	</div>
 	<div class="col-md-6 text-left"><br><br>
-    <h3 class="head-line title_h3">レビュー件数&nbsp&nbsp&nbsp<%= @reviews.total_count %></h3><br>
+    <h3 class="head-line title_h3">レビュー件数&nbsp&nbsp&nbsp<%= @reviews.total_count %>件</h3><br>
     <h3 class="head-line title_h3">自己紹介</h3><br>
+    <% if @farmer.introduction.present? %>
     <p><%= @farmer.introduction %></p>
+    <% else %>
+		　<h4 class="text-center">こんにちは！</h4>
+		  <% end  %>
 	</div>
 	<div class="col-md-6">
 	  <table class="table table-bordered table-condensed" >
@@ -29,6 +33,7 @@
 <br><br><br>
   <div class="col-md-12">
    <br><br><h2 class="job_offer-headline head-line title_h2 text-center">ブログ</h2><br><br>
+   <% if @favos.present? %>
    <div class="blogs">
 		<% @blogs.each do |blog| %>
 		<div class="blog_box">
@@ -42,6 +47,9 @@
     <% end %>
     <%= paginate @blogs, theme: 'twitter-bootstrap-4', class: "text-center" %>
    </div>
+   <% else %>
+		　<h4 class="text-center">投稿したブログはありません。</h4>
+		<% end  %>
  </div>
 
  <div class="col-md-12">

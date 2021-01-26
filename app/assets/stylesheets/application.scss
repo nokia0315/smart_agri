@@ -24,12 +24,17 @@
   // color: #6c6b6b;
 }
 
-header {
+header nav{
   margin-bottom: 15px;
+
 }
 
+body{
+  padding-top: 12vh;
+          }
+
 footer {
-  margin-top: 15px;
+  margin: 15px 0 0 0;
 }
 
 .reviews,.blogs{
@@ -56,3 +61,4 @@ footer {
 .pagination {
   justify-content: center;
 }
+
