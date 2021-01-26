@@ -1,26 +1,26 @@
 <div class="row">
-	<div class="col-md-8">
+	<div class="col-md-6">
 		<br><br><h2 class="head-line title_h2"><%= @farmer.first_name %><%= @farmer.last_name %>さんのプロフィール<i class="far fa-user"></i></h2>
     <p><%= attachment_image_tag @farmer, :image, fallback: "no_image.jpg", size: '250x250' %></p>
 	</div>
-	<div class="col-md-4"><br><br>
+	<div class="col-md-6 text-left"><br><br>
     <h3 class="head-line title_h3">レビュー件数&nbsp&nbsp&nbsp<%= @reviews.total_count %></h3><br>
     <h3 class="head-line title_h3">自己紹介</h3><br>
     <p><%= @farmer.introduction %></p>
 	</div>
-	<div class="col-md-12">
+	<div class="col-md-6">
 	  <table class="table table-bordered table-condensed" >
   	 <tbody>
   		<tr>
-  			<td class="info">住所</td>
+  			<th class="text-center">住所</th>
   			<td class="text-left"><%= @farmer.residence %></td>
   		</tr>
   		<tr>
-  			<td class="info">電話番号</td>
+  			<th class="text-center">電話番号</th>
   			<td class="text-left"><%= @farmer.phone_number %></td>
   		</tr>
   		<tr>
-  			<td class="info">メールアドレス</td>
+  			<th class="text-center">メールアドレス</th>
   			<td class="text-left"><%= @farmer.email %></td>
   		</tr>
   	 </tbody>
@@ -29,29 +29,31 @@
 <br><br><br>
   <div class="col-md-12">
    <br><br><h2 class="job_offer-headline head-line title_h2 text-center">ブログ</h2><br><br>
-   <div class="blog">
+   <div class="blogs">
 		<% @blogs.each do |blog| %>
+		<div class="blog_box">
 		 <%= link_to users_farmer_blog_path(users_farmer_id: @farmer.id, id: blog.id) do %>
      <%= attachment_image_tag blog, :image, fallback: "no_image.jpg", size: '200x200' %>
-     <% end %>
+   <% end %>
+   <br>
     <p>タイトル：<%= blog.title %></p>
     <p>投稿日時：<%= blog.created_at.strftime('%Y/%m/%d') %></p>
+  </div>
     <% end %>
     <%= paginate @blogs, theme: 'twitter-bootstrap-4', class: "text-center" %>
    </div>
  </div>
 
- <div class="col-md-12 text-center">
+ <div class="col-md-12">
   <br><br><h4 class="job_offer-headline head-line title_h4 text-center"><%= @farmer.first_name %><%= @farmer.last_name %>さんの求人一覧</h4><br><br>
  <table class="table">
   <tr></tr>
   <thead>
     <tr>
-      <td>求人名</td>
-      <td>報酬</td>
-      <td>募集形態</td>
-      <td>募集状況</td>
-      <td></td>
+      <th class="text-center">求人名</th>
+      <th class="text-center">報酬</th>
+      <th class="text-center">募集形態</th>
+      <th class="text-center">募集状況</th>
     </tr>
   </thead>
   <tbody>
@@ -65,7 +67,6 @@
       <td><%= job_offer.reward %></td>
       <td><%= job_offer.genre.name %></td>
       <td><%= job_offer.is_valid %></td>
-      <td></td>
     </tr>
   <% end %>
   </tbody>
@@ -80,6 +81,7 @@
  <p>レビュー件数：<%= @reviews.total_count %></p>
 <div class="reviews">
 <% @reviews.each do |review| %>
+<div class="reviews_box">
  <%= link_to users_farmer_review_path(users_farmer_id: @farmer.id, id: review.id) do %>
   <p><%= attachment_image_tag review.user, :image, :fill, 100, 100, format: 'jpeg', fallback: "no_image.jpg" %></p>
   <%= review.user.first_name %>
@@ -101,12 +103,13 @@
           });
    </script>
   </div>
+  </div>
 
   <!--/星評価-->
 <% end %>
 </div>
  <div class="text-center">
-  <%= paginate @reviews, theme: 'twitter-bootstrap-4', class: "text-center" %>
+    <%= paginate @reviews, theme: 'twitter-bootstrap-4', class: "text-center" %>
   <%= link_to "求人一覧", users_job_offers_path, class: "glyphicon glyphicon-shopping-cart btn-lg btn-info" %>
   <%= link_to "レビュー投稿", new_users_farmer_review_path(@farmer), class: "glyphicon glyphicon-pencil btn-lg btn-success center-block" %><br><br>
  </div>

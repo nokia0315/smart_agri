@@ -1,7 +1,7 @@
 class User::UsersController < ApplicationController
   def show
     @user = current_user
-    @favos = Favo.where(user_id: @user.id).all
+    @favos = Favo.where(user_id: @user.id).page(params[:page]).per(5)
     # @user = user.find(params[:id])
   end
 

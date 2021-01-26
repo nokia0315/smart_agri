@@ -6,7 +6,7 @@
     	<h2 class="job_offer-headline head-line title_h2 text-center">求人詳細</h2><br>
     	<table class="table">
     		<tr>
-    			<th>
+    			<th class="text-center">
     				タイトル
     			</th>
     			<td>
@@ -14,7 +14,7 @@
     			</td>
     		</tr>
     		<tr>
-    			<th>
+    			<th class="text-center">
     				説明
     			</th>
     			<td>
@@ -22,7 +22,7 @@
     			</td>
     		</tr>
     		<tr>
-    			<th>
+    			<th class="text-center">
     				報酬
     			</th>
     			<td>
@@ -30,7 +30,7 @@
     			</td>
     		</tr>
     		<tr>
-    			<th>
+    			<th class="text-center">
     				募集状況
     			</th>
     			<td>
@@ -38,7 +38,7 @@
     			</td>
     		</tr>
     		<tr>
-    			<th>
+    			<th class="text-center">
     				農業者
     			</th>
     			<td>
@@ -50,13 +50,13 @@
       	<% if @job_offer.favorited_by?(current_user) %>
        <p>
       <%= link_to users_job_offer_favos_path(@job_offer), method: :delete do %>
-        ♥<%= @job_offer.favos.count %> キープ
+        <i class="fas fa-star"></i><%= @job_offer.favos.count %> キープ
       <% end %>
        </p>
       <% else %>
        <p>
       <%= link_to users_job_offer_favos_path(@job_offer), method: :post do %>
-        ♡<%= @job_offer.favos.count %> キープ
+        <i class="far fa-star"></i><%= @job_offer.favos.count %> キープ
       <% end %>
        </p>
       <% end %>
