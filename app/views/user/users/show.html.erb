@@ -1,11 +1,12 @@
 <div class="row">
 	<div class="col-md-6">
 		<h5 class="head-line text-center title_h2">
-			<% if @user.first_name.blank? %>
-      <%= @user.email %>
+	  <% if @user.first_name.blank? %>
+       <%= @user.email %>
       <% else %>
-      <%= full_name(@user) %>
-      <% end %>さんのマイページ</h5><br>
+       <%= full_name(@user) %>
+      <% end %>
+      さんのマイページ</h5><br>
       <div class="button text-center">
       <%= attachment_image_tag @user, :image, format: 'jpeg', fallback: "no_image.jpg", size: '200x200' %>&nbsp&nbsp
 			<% if @user == current_user %>
@@ -46,8 +47,6 @@
 				</tr>
 			</tbody>
 		</table>
-
-
  	</div>
  	<div class="col-md-6 pt-5">
 	 	<h2 class="text-center">お気に入りの求人</h2>

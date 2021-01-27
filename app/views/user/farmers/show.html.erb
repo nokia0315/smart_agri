@@ -10,7 +10,7 @@
     <p><%= @farmer.introduction %></p>
     <% else %>
 		　<h4 class="text-center">こんにちは！</h4>
-		  <% end  %>
+		<% end  %>
 	</div>
 	<div class="col-md-6">
 	  <table class="table table-bordered table-condensed" >
@@ -33,7 +33,7 @@
 <br><br><br>
   <div class="col-md-12">
    <br><br><h2 class="job_offer-headline head-line title_h2 text-center">ブログ</h2><br><br>
-   <% if @favos.present? %>
+   <% if @blogs.present? %>
    <div class="blogs">
 		<% @blogs.each do |blog| %>
 		<div class="blog_box">
