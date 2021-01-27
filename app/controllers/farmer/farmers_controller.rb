@@ -5,7 +5,7 @@ class Farmer::FarmersController < ApplicationController
   end
 
   def show
-    @farmer = current_farmer
+    @farmer = Farmer.find(params[:id])
     @blogs = @farmer.blogs.all
     @job_offers = @farmer.job_offers.all
   end

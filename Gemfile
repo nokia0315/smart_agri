@@ -82,3 +82,5 @@ gem 'jquery-rails'
 gem 'font-awesome-sass', '~> 5.13'
 
 gem 'bootstrap4-kaminari-views'
+
+gem 'pry-rails'

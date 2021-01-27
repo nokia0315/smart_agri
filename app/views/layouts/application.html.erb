@@ -4,6 +4,7 @@
     <title>SmartAgri</title>
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
+    <link href="https://fonts.googleapis.com/css?family=Corben:700 rel="stylesheet" >
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <script src="https://kit.fontawesome.com/72510f58ad.js" crossorigin="anonymous"></script>
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
@@ -11,13 +12,10 @@
   </head>
 
   <body class="d-flex flex-column vh-100">
-
-    <header class="shadow-sm fixed-top">
-      <nav class="navbar navbar-expand-lg navbar-fixed-top navbar-light" role="navigation" >
+    <header class="shadow-sm fixed-top ">
+      <nav class="navbar navbar-expand-lg navbar-fixed-top navbar-light " role="navigation" >
         <div class="container">
-          <a class="navbar-brand p-3" href="/">
-           <%= link_to "Smart Agri", root_path, class: "fas fa-birthday-cake" %>
-          </a>
+           <a class="navbar-brand p-3" href="/"><%= image_tag('logo3.png', :size => '90x90')  %></a>
           <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
           </button>
@@ -38,16 +36,16 @@
                 </li>
               <% elsif farmer_signed_in? %>
                 <li>
-                  TOP
+                  <%= link_to "TOP", top_path, class: 'btn btn-outline-success fas fa-laptop-house' %>
                 </li>
                 <li>
-                  <%= link_to "求人一覧", farmers_job_offers_path, class: 'btn btn-outline-success' %>
+                  <%= link_to "求人一覧", farmers_job_offers_path, class: 'btn btn-outline-success fas fa-indent' %>
                 </li>
                 <li>
-                  <%= link_to "農業者マイページ", farmer_path(current_farmer.id), class: 'btn btn-outline-success' %>
+                  <%= link_to "マイページ", farmer_path(current_farmer.id), class: 'btn btn-outline-success fas fa-house-user' %>
                 </li>
                 <li>
-                  <%= link_to "ログアウト", destroy_farmer_session_path, method: :delete %>
+                  <%= link_to "ログアウト", destroy_farmer_session_path, method: :delete, class: 'btn btn-outline-dark fas fa-sign-out-alt' %>
                 </li>
               <% elsif admin_signed_in? %>
                 <li>
@@ -72,23 +70,24 @@
                   <%= link_to "ログアウト", destroy_admin_session_path, method: :delete %>
                 </li>
               <% else %>
+
                 <li>
-                  <%= link_to "新規会員登録", new_user_registration_path %>
+                  <%= link_to "新規会員登録", new_user_registration_path, class: "btn btn-outline-info" %>
                 </li>
                 <li>
-                  <%= link_to "会員ログイン", new_user_session_path %>
+                  <%= link_to "会員ログイン", new_user_session_path, class: "btn btn-outline-success" %>
                 </li>
                 <li>
-                  <%= link_to "新規農業者登録", new_farmer_registration_path %>
+                  <%= link_to "新規農業者登録", new_farmer_registration_path, class: "btn btn-outline-info" %>
                 </li>
                 <li>
-                  <%= link_to "農業者ログイン", new_farmer_session_path %>
+                  <%= link_to "農業者ログイン", new_farmer_session_path, class: "btn btn-outline-success" %>
                 </li>
                 <li>
-                  <%= link_to "新規管理者登録", new_admin_registration_path %>
+                  <%#= link_to "新規管理者登録", new_admin_registration_path %>
                 </li>
                 <li>
-                  <%= link_to "管理者ログイン", new_admin_session_path %>
+                  <%#= link_to "管理者ログイン", new_admin_session_path %>
                 </li>
               <% end %>
             </ul>
@@ -103,16 +102,14 @@
 
     <main class="mb-auto">
       <div class="container">
-        <%= yield %>
-
+          <%= yield %>
       </div>
     </main>
 
-    <footer class="bg-dark text-white pt-3 pb-4">
-      <div class="container">
-        <div class="row no-gutters">
+    <footer class=" text-white pt-3 pb-4">
+        <div class="row no-gutters col-md-10 offset-md-2">
           <div class="col-md-4">
-            <h2>logo</h2>
+            <a class="navbar-brand p-3" href="/"><%= image_tag('logo3.png', :size => '100x100')  %></a>
           </div>
           <div class="col-md-8">
             <h6 class="text-white mt-2 mb-3"><%= link_to "お問い合わせ", contact_path %></h6>

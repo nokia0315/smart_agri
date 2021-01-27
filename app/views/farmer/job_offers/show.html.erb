@@ -1,42 +1,58 @@
-<h4>商品詳細</h4>
-
-<div class="container">
 	<div class="row">
 	  <div class="col-md-4">
-	     <%#= attachment_image_tag @job_offer, :job_offers_image, size: "250x250", fallback: "no_image.jpg" %>
+	     <%= attachment_image_tag @job_offer, :image_id, size: "250x250", fallback: "no_image.jpg" %>
     </div>
     <div class="col-md-8">
-      <div class="field">
-				<p>
-					タイトル     <%= @job_offer.title %>
-				</p>
+    	<h2 class="job_offer-headline head-line title_h2 text-center">求人詳細</h2><br>
+    	<table class="table">
+    		<tr>
+    			<th class="text-center">
+    				タイトル
+    			</th>
+    			<td>
+    				<%= @job_offer.title %>
+    			</td>
+    		</tr>
+    		<tr>
+    			<th class="text-center">
+    				説明
+    			</th>
+    			<td>
+    				<%= @job_offer.explanation %>
+    			</td>
+    		</tr>
+    		<tr>
+    			<th class="text-center">
+    				報酬
+    			</th>
+    			<td>
+    				<%= @job_offer.reward %>
+    			</td>
+    		</tr>
+    		<tr>
+    			<th class="text-center">
+    				募集状況
+    			</th>
+    			<td>
+    				<%= @job_offer.is_valid %>
+    			</td>
+    		</tr>
+    		<tr>
+    			<th class="text-center">
+    				農業者
+    			</th>
+    			<td>
+    				<%= link_to @job_offer.farmer.first_name, farmer_path(@job_offer.farmer.id) %>
+    			</td>
+    		</tr>
+    	</table>
+       <% if @job_offer.farmer == current_farmer %>
+      <div class="actions col-md-6 offset-md-3">
+      	<%= link_to "編集する", edit_farmers_job_offer_path(@job_offer), class: "glyphicon glyphicon-pencil btn btn-outline-success btn-block" %>
+    	  <%= link_to "一覧に戻る", farmers_job_offers_path, class: "glyphicon glyphicon-pencil btn btn-outline-secondary btn-block" %>
+        <%= link_to "削除する", farmers_job_offer_path(@job_offer), method: :delete, "data-confirm" => "Are you sure？", class: 'btn btn-outline-danger btn-block' %>
       </div>
-	    <div class="field">
-				<p>
-					説明    <%= @job_offer.explanation %>
-				</p>
-	    </div>
-	    <div class="field">
-				<p>
-					報酬    <%= @job_offer.reward %>
-				</p>
-	    </div>
-	    <div class="field">
-				<p>
-										募集形態    <%= @job_offer.genre.name %>
-				</p>
-	    </div>
-	    <div class="field">
-				<p>
-					販売ステータス
-	        <%= @job_offer.is_valid %>
-				</p>
-	    </div>
-      <div class="actions col-md-9">
-      	<%= link_to "編集する", edit_farmers_job_offer_path(@job_offer), class: "glyphicon glyphicon-pencil btn btn-success pull-right" %>
-    	  <%= link_to "一覧に戻る", farmers_job_offers_path, class: "glyphicon glyphicon-pencil btn btn-success pull-right" %>
-        <%= link_to "削除する", farmers_job_offer_path(@job_offer), method: :delete, "data-confirm" => "Are you sure？", class: 'btn btn-sm btn-danger' %>
-      </div>
+      <% end %>
   	</div>
 	</div>
 </div>

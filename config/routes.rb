@@ -22,6 +22,7 @@ Rails.application.routes.draw do
   get 'contact/thanks'
 
   scope module: :farmer do
+    get 'f-top' => 'job_offers#top', as: 'top'
     scope :farmers do
       resources :job_offers, as: 'farmers_job_offers'
       resources :genres, only: [:index, :create, :edit, :update]

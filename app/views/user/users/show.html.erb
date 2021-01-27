@@ -1,91 +1,93 @@
-<div class="row">
-	<div class="col-md-6">
-		<h5 class="head-line text-center title_h2">
-	  <% if @user.first_name.blank? %>
-       <%= @user.email %>
-      <% else %>
-       <%= full_name(@user) %>
-      <% end %>
-      さんのマイページ</h5><br>
-      <div class="button text-center">
-      <%= attachment_image_tag @user, :image, format: 'jpeg', fallback: "no_image.jpg", size: '200x200' %>&nbsp&nbsp
-			<% if @user == current_user %>
- 				<%= link_to "編集する", edit_user_path(@user),class: "glyphicon glyphicon-pencil btn btn-success fas fa-user-edit"  %>
-  			<%= link_to "パスワードを変更する", edit_user_registration_path, class: "glyphicon glyphicon-pencil btn btn-warning fas fa-key" %>
- 		  <% end %>
-		</div><br><br>
+<div class="container-box">
+	<div class="row">
+		<div class="col-md-6">
+			<h5 class="head-line text-center title_h2">
+		  <% if @user.first_name.blank? %>
+	       <%= @user.email %>
+	      <% else %>
+	       <%= full_name(@user) %>
+	      <% end %>
+	      さんのマイページ</h5><br>
+	      <div class="button text-center">
+	      <%= attachment_image_tag @user, :image, format: 'jpeg', fallback: "no_image.jpg", size: '200x200' %>&nbsp&nbsp
+				<% if @user == current_user %>
+	 				<%= link_to "編集する", edit_user_path(@user),class: "glyphicon glyphicon-pencil btn btn-success fas fa-user-edit"  %>
+	  			<%= link_to "パスワードを変更する", edit_user_registration_path, class: "glyphicon glyphicon-pencil btn btn-warning fas fa-key" %>
+	 		  <% end %>
+			</div><br><br>
 
-		<table class="table table-bordered table-condensed" >
-			<tbody>
-				<tr>
-					<th class="text-center">氏名</th>
-					<td class="text-left"><%= @user.first_name %><%= @user.last_name %></td>
-				</tr>
-				<tr>
-					<th class="text-center">カナ</th>
-					<td class="text-left"><%= @user.kana_first_name %><%= @user.kana_last_name %></td>
-				</tr>
-				<tr>
-					<th class="text-center">郵便番号</th>
-					<td class="text-left"><%= @user.postal_code %></td>
-				</tr>
-				<tr>
-					<th class="text-center">住所</th>
-					<td class="text-left"><%= @user.residence %></td>
-				</tr>
-				<tr>
-					<th class="text-center">電話番号</th>
-					<td class="text-left"><%= @user.phone_number %></td>
-				</tr>
-				<tr>
-					<th class="text-center">メールアドレス</th>
-					<td class="text-left"><%= @user.email %></td>
-				</tr>
-				<tr>
-					<th class="text-center">自己紹介</th>
-					<td class="text-left"><%= @user.introduction %></td>
-				</tr>
-			</tbody>
-		</table>
- 	</div>
- 	<div class="col-md-6 pt-5">
-	 	<h2 class="text-center">お気に入りの求人</h2>
-	 	<% if @favos.present? %>
-	  <p class="text-center">
-	  	ページ:<%= @favos.current_page %> / <%= @favos.total_pages %><br>
-      <%= @favos.total_count %>件中<%= @favos.offset_value %>〜<%= @favos.offset_value + @favos.length %>件を表示しています。<br>
-	  </p>
-		<div class="clearfix job_offer-box float-right">
-        <table class="table">
-         <thead>
-          <tr>
-            <th class="text-center">求人名</th>
-            <th class="text-center">報酬</th>
-            <th class="text-center">募集形態</th>
-            <th class="text-center">募集状況</th>
-            <th class="text-center">農業者</th>
-            <th class="text-center"></th>
-          </tr>
-         </thead>
-         <tbody>
-          <% @favos.each  do |favo| %>
-           <tr>
-            <td>
-              <%= link_to users_job_offer_path(favo.job_offer_id) do %>
-				       <%= favo.job_offer.title %>
-				      <% end %>
-            </td>
-            <td><%= favo.job_offer.reward %></td>
-            <td><%= favo.job_offer.genre.name %></td>
-            <td><%= favo.job_offer.is_valid %></td>
-            <td> <%= link_to favo.job_offer.farmer.first_name, users_farmer_path(favo.job_offer.farmer.id) %></td>
-            <% end  %>
-    				<%= paginate @favos, theme: 'twitter-bootstrap-4', class: "text-center" %>
-		<% else %>
-		　<h4 class="text-center">キープした求人はありません。</h4>
-		<% end  %>
-           </tr>
-          </tbody>
-        </table>
- 	</div>
+			<table class="table table-bordered table-condensed" >
+				<tbody>
+					<tr>
+						<th class="text-center">氏名</th>
+						<td class="text-left"><%= @user.first_name %><%= @user.last_name %></td>
+					</tr>
+					<tr>
+						<th class="text-center">カナ</th>
+						<td class="text-left"><%= @user.kana_first_name %><%= @user.kana_last_name %></td>
+					</tr>
+					<tr>
+						<th class="text-center">郵便番号</th>
+						<td class="text-left"><%= @user.postal_code %></td>
+					</tr>
+					<tr>
+						<th class="text-center">住所</th>
+						<td class="text-left"><%= @user.residence %></td>
+					</tr>
+					<tr>
+						<th class="text-center">電話番号</th>
+						<td class="text-left"><%= @user.phone_number %></td>
+					</tr>
+					<tr>
+						<th class="text-center">メールアドレス</th>
+						<td class="text-left"><%= @user.email %></td>
+					</tr>
+					<tr>
+						<th class="text-center">自己紹介</th>
+						<td class="text-left"><%= @user.introduction %></td>
+					</tr>
+				</tbody>
+			</table>
+	 	</div>
+	 	<div class="col-md-6 pt-5">
+		 	<h2 class="text-center">お気に入りの求人</h2>
+		 	<% if @favos.present? %>
+		  <p class="text-center">
+		  	ページ:<%= @favos.current_page %> / <%= @favos.total_pages %><br>
+	      <%= @favos.total_count %>件中<%= @favos.offset_value %>〜<%= @favos.offset_value + @favos.length %>件を表示しています。<br>
+		  </p>
+			<div class="clearfix job_offer-box float-right">
+	        <table class="table">
+	         <thead>
+	          <tr>
+	            <th class="text-center">求人名</th>
+	            <th class="text-center">報酬</th>
+	            <th class="text-center">募集形態</th>
+	            <th class="text-center">募集状況</th>
+	            <th class="text-center">農業者</th>
+	            <th class="text-center"></th>
+	          </tr>
+	         </thead>
+	         <tbody>
+	          <% @favos.each  do |favo| %>
+	           <tr>
+	            <td>
+	              <%= link_to users_job_offer_path(favo.job_offer_id) do %>
+					       <%= favo.job_offer.title %>
+					      <% end %>
+	            </td>
+	            <td><%= favo.job_offer.reward %></td>
+	            <td><%= favo.job_offer.genre.name %></td>
+	            <td><%= favo.job_offer.is_valid %></td>
+	            <td> <%= link_to favo.job_offer.farmer.first_name, users_farmer_path(favo.job_offer.farmer.id) %></td>
+	            <% end  %>
+	    				<%= paginate @favos, theme: 'twitter-bootstrap-4', class: "text-center" %>
+			<% else %>
+			　<h4 class="text-center">キープした求人はありません。</h4>
+			<% end  %>
+	           </tr>
+	          </tbody>
+	        </table>
+	 	</div>
+	</div>
 </div>
