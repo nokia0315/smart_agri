@@ -1,6 +1,6 @@
 <div class="container-box">
 	<div class="row">
-		<div class="col-md-6">
+		<div class="col-md-5 offset-md-1">
 			<h5 class="head-line text-center title_h2">
 		  <% if @user.first_name.blank? %>
 	       <%= @user.email %>
@@ -8,15 +8,39 @@
 	       <%= full_name(@user) %>
 	      <% end %>
 	      さんのマイページ</h5><br>
-	      <div class="button text-center">
-	      <%= attachment_image_tag @user, :image, format: 'jpeg', fallback: "no_image.jpg", size: '200x200' %>&nbsp&nbsp
-				<% if @user == current_user %>
-	 				<%= link_to "編集する", edit_user_path(@user),class: "glyphicon glyphicon-pencil btn btn-success fas fa-user-edit"  %>
-	  			<%= link_to "パスワードを変更する", edit_user_registration_path, class: "glyphicon glyphicon-pencil btn btn-warning fas fa-key" %>
-	 		  <% end %>
-			</div><br><br>
+	      <div class="row">
+	      	<div class="col-md-4">
+					<%= attachment_image_tag @user, :image, format: 'jpeg', fallback: "no_image.jpg", size: '150x150' %>&nbsp&nbsp
+	        </div>
+		      <div class="button col-md-8">
+						<% if @user == current_user %>
+			 				<%= link_to "編集する", edit_user_path(@user),class: "glyphicon glyphicon-pencil btn btn-success fas fa-user-edit"  %>
+			  			<%= link_to "パスワードの変更", edit_user_registration_path, class: "glyphicon glyphicon-pencil btn btn-warning fas fa-key" %>
+			 		  <% end %>
+			 		  <br><br>
+			 		  <div class="offset-md-2">
+			 		  	<table>
+			 		  	<tr>
+			 		  		<th>
+			 		  			<h3>自己紹介</h3>
+			 		  		</th>
+			 		  	</tr>
+			 		  	<tr>
+			 		  		<td>
+			 		  			<% if @user.introduction.present? %>
+			 		  		  <p class="intro-box"><%= @user.introduction %></p>
+			 		  		  <% else %>
+			 		  		   <p>こんにちは！</p>
+			 		  		   <% end %>
+			 		  		</td>
+			 		  	</tr>
+			 		  </table>
+			 		 </div>
+					</div>
+	      </div><br>
 
-			<table class="table table-bordered table-condensed" >
+
+			<table class="table" >
 				<tbody>
 					<tr>
 						<th class="text-center">氏名</th>
@@ -42,22 +66,18 @@
 						<th class="text-center">メールアドレス</th>
 						<td class="text-left"><%= @user.email %></td>
 					</tr>
-					<tr>
-						<th class="text-center">自己紹介</th>
-						<td class="text-left"><%= @user.introduction %></td>
-					</tr>
 				</tbody>
 			</table>
 	 	</div>
-	 	<div class="col-md-6 pt-5">
+	 	<div class="col-md-5 offset-ml-auto pt-5">
 		 	<h2 class="text-center">お気に入りの求人</h2>
 		 	<% if @favos.present? %>
 		  <p class="text-center">
 		  	ページ:<%= @favos.current_page %> / <%= @favos.total_pages %><br>
 	      <%= @favos.total_count %>件中<%= @favos.offset_value %>〜<%= @favos.offset_value + @favos.length %>件を表示しています。<br>
 		  </p>
-			<div class="clearfix job_offer-box float-right">
-	        <table class="table">
+			<div class="clearfix job_offer-box">
+	        <table class="table" >
 	         <thead>
 	          <tr>
 	            <th class="text-center">求人名</th>
@@ -65,7 +85,6 @@
 	            <th class="text-center">募集形態</th>
 	            <th class="text-center">募集状況</th>
 	            <th class="text-center">農業者</th>
-	            <th class="text-center"></th>
 	          </tr>
 	         </thead>
 	         <tbody>
@@ -89,5 +108,5 @@
 	          </tbody>
 	        </table>
 	 	</div>
-	</div>
+	</div><br><br>
 </div>

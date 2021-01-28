@@ -39,7 +39,7 @@ html {
 }
 
 body{
-  padding-top: 15vh;
+  padding-top: 17vh;
   position: relative; /*相対位置*/
   background-image: image-url('haikei4.jpg');
   background-size: cover;
@@ -94,5 +94,29 @@ footer {
 
 .pagination {
   justify-content: center;
+}
+
+.intro-box{
+    background-color: #faebd7;
+
+}
+
+table{
+  border: 2px solid #000;
+  border-collapse: collapse;
+
+}
+
+table th{
+  background-color: #ffdead;
+  color: #6c2463;
+  border:   1px solid #000;
+
+}
+
+table td{
+  background-color: #faebd7;
+  border: 1px solid #000;
+  word-break: break-all;
 }
 
