@@ -15,7 +15,7 @@
     <header class="shadow-sm fixed-top ">
       <nav class="navbar navbar-expand-lg navbar-fixed-top navbar-light " role="navigation" >
         <div class="container">
-           <a class="navbar-brand p-3" href="/"><%= image_tag('logo3.png', :size => '90x90')  %></a>
+           <a class="navbar-brand p-3" href="/"><h2><i class="fas fa-tractor"></i>&nbspSmart Agri</h2></a>
           <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
           </button>
@@ -23,16 +23,16 @@
             <ul class="navbar-nav ml-auto">
               <% if user_signed_in? %>
                 <li>
-                  <%= link_to "TOP", "/", class: 'btn btn-outline-success fas fa-laptop-house' %>
+                  <%= link_to "TOP", "/", class: 'btn-lg btn-success fas fa-laptop-house' %>
                 </li>
                 <li>
-                  <%= link_to "求人一覧", users_job_offers_path, class: 'btn btn-outline-success fas fa-indent' %>
+                  <%= link_to "求人一覧", users_job_offers_path, class: 'btn-lg btn-success fas fa-indent' %>
                 </li>
                 <li>
-                  <%= link_to "マイページ", user_path(current_user.id), class: 'btn btn-outline-success fas fa-house-user' %>
+                  <%= link_to "マイページ", user_path(current_user.id), class: 'btn-lg btn-success fas fa-house-user' %>
                 </li>
                 <li>
-                  <%= link_to "ログアウト", destroy_user_session_path, method: :delete, class: 'btn btn-outline-dark fas fa-sign-out-alt' %>
+                  <%= link_to "ログアウト", destroy_user_session_path, method: :delete, class: 'btn-lg btn-dark fas fa-sign-out-alt' %>
                 </li>
               <% elsif farmer_signed_in? %>
                 <li>
@@ -45,7 +45,7 @@
                   <%= link_to "マイページ", farmer_path(current_farmer.id), class: 'btn btn-outline-success fas fa-house-user' %>
                 </li>
                 <li>
-                  <%= link_to "ログアウト", destroy_farmer_session_path, method: :delete, class: 'btn btn-outline-dark fas fa-sign-out-alt' %>
+                  <%= link_to "ログアウト", destroy_farmer_session_path, method: :delete, class: 'btn-lg btn-dark fas fa-sign-out-alt' %>
                 </li>
               <% elsif admin_signed_in? %>
                 <li>

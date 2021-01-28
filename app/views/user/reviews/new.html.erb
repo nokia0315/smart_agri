@@ -1,6 +1,6 @@
 <div class="container-box">
-  <div class="row">
-    <div class="review-form col-md-12">
+  <div class="row pt-5">
+    <div class="review-form col-md-10 mx-auto">
       <!--エラーメッセージ-->
       <%#= render 'layouts/error_messages', model: f.object %>
       <!--農業者コードの送信-->
@@ -35,16 +35,21 @@
 
       <!-- 口コミ -->
       <div class="form-group row">
-        <%= f.label :explanation, '口コミ内容 ', class:'col-md-3 col-form-label font-weight-bold' %>
+        <%= f.label :explanation, '口コミ内容 ', class: 'col-md-3 col-form-label font-weight-bold' %>
         <div class="col-md-9">
           <%= f.text_area :explanation, class: "form-control", rows: "8",placeholder:'口コミ内容がなくても、タイトルと評価のみで投稿できます。まずは投稿してみましょう！投稿してから編集もできますよ！' %>
         </div>
       </div>
 
+        <div for="inputImage col-md-9">
+        <%= f.attachment_field :image, placeholder: "プロフィール画像", class: "col-md-3 offset-md-5 col-form-label font-weight-bold" %><br>
+        <%= attachment_image_tag @review, :image, size: "250x250", fallback: "no_image.jpg", class: "d-block mx-auto"%>
+        </div>
+
       <!-- 確認ボタン -->
-      <div class="form-group row justify-content-end">
+      <div class="form-group row justify-content-end mt-5">
         <div class="col-md-9 text-center">
-          <%= f.submit '投稿する', class:"btn btn-outline-success btn-block" %>
+          <%= f.submit '投稿する', class:"btn btn-success btn-block" %><br>
         </div>
       </div>
 

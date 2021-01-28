@@ -2,7 +2,7 @@
   <div class="row">
   	<div class="col-md-4 offset-md-1">
   		<br><br><h4 class="head-line title_h4"><i class="far fa-user "></i><%= @farmer.first_name %><%= @farmer.last_name %>さんのプロフィール</h4><br>
-      <p><%= attachment_image_tag @farmer, :image, fallback: "no_image.jpg", size: '150x150' %></p>
+      <p><%= attachment_image_tag @farmer, :image, fallback: "no_image.jpg", size: '150x150', class: "rounded-circle d-block mx-auto" %></p>
   	</div>
   	<div class="col-md-6 offset-md-1"><br><br>
   	 <div class="review-count col-md-8 mx-auto">
@@ -86,7 +86,7 @@
    </div>
 
    <div class="col-md-7 mx-auto">
-    <br><br><h4 class="job_offer-headline head-line title_h4 text-center"><%= @farmer.first_name %><%= @farmer.last_name %>さんの求人一覧</h4><br><br>
+    <br><br><h4 class="job_offer-headline head-line title_h4 text-center"><%= @farmer.first_name %><%= @farmer.last_name %>さんの求人</h4><br><br>
    <table class="table">
     <tr></tr>
     <thead>
@@ -115,11 +115,10 @@
     <%= paginate @job_offers, theme: 'twitter-bootstrap-4', class: "text-center" %>
   </div>
   <div class="col-md-12">
-   <br><br><h4 class="job_offer-headline head-line title_h4 text-center"><%= @farmer.first_name %><%= @farmer.last_name %>さんのレビュー一覧</h4><br><br>
+   <br><br><h4 class="job_offer-headline head-line title_h4 text-center"><%= @farmer.first_name %><%= @farmer.last_name %>さんのレビュー</h4><br><br>
      <p class="text-center">ページ:<%= @reviews.current_page %> / <%= @reviews.total_pages %><br>
    <%= @reviews.total_count %>件中<%= @reviews.offset_value %>
-   〜<%= @reviews.offset_value + @reviews.length %>件を表示しています。</p>
-   <p>レビュー件数：<%= @reviews.total_count %></p>
+   〜<%= @reviews.offset_value + @reviews.length %>件を表示しています。<br>レビュー件数：<%= @reviews.total_count %></p>
      <% if @reviews.present? %>
      <div class=" reviews">
   		<% @reviews.each do |review| %>
@@ -128,10 +127,12 @@
          <tr>
            <th>
              <h3>
-               <% if review.title.present? %>
-                <%= review.title %>
-               <% else %>
-                無題
+               <%= link_to users_farmer_review_path(users_farmer_id: @farmer.id, id: review.id) do %>
+                   <% if review.title.present? %>
+                    <%= review.title %>
+                   <% else %>
+                    無題
+                   <% end %>
                <% end %>
              </h3>
            </th>
@@ -139,7 +140,7 @@
          <tr>
            <th>
              <b class="mb-3">評価：<%= review.rate %>点 </b>
-             　<div class="rate-star">
+              <div class="rate-star">
                 <div id="star-rate-<%= review.id %>"></div>
                  <script>
                     $('#star-rate-<%= review.id %>').raty({
@@ -158,11 +159,14 @@
          </tr>
          <tr>
            <td>
+             <%= link_to users_farmer_review_path(users_farmer_id: @farmer.id, id: review.id) do %>
+              <%= attachment_image_tag review.user, :image, size: '50x50', format: 'jpeg', fallback: "no_image.jpg", class: "rounded-circle d-block mx-auto" %>
+            <% end %>
              <% if review.user.first_name.present? %>
-              <%= review.user.first_name %>さん
+              <p class="text-center"><%= review.user.first_name %>さん</p>
              <% else %>
               <p>名無しさん</p>
-              <% end %>
+             <% end %>
            </td>
          </tr>
          <tr>
@@ -172,9 +176,9 @@
          </tr>
          <tr>
            <td>
-              <%= link_to users_farmer_review_path(users_farmer_id: @farmer.id, id: review.id) do %>
-      　　　　　　<p><%= attachment_image_tag review.user, :image, :fill, 100, 100, format: 'jpeg', fallback: "no_image.jpg" %></p>
-           　　<% end %>
+               <%= link_to users_farmer_review_path(users_farmer_id: @farmer.id, id: review.id) do %>
+                <%= attachment_image_tag review, :image, size: "200x200", fallback: "no_image.jpg" %>
+               <% end %>
            </td>
          </tr>
        </table>
@@ -183,7 +187,7 @@
      </div>
      <%= paginate @reviews, theme: 'twitter-bootstrap-4', class: "text-center" %>
      <% else %>
-  		 <h4 class="text-center">投稿したブログはありません。</h4>
+  		 <h4 class="text-center">レビューはありません。</h4>
   	 <% end  %>
   	 <div class="text-center mt-5">
     <%= link_to "求人一覧", users_job_offers_path, class: "glyphicon glyphicon-shopping-cart btn-lg btn-info" %>

@@ -1,15 +1,37 @@
 <div class="container-box">
   <h2 class="job_offer-headline head-line title_h2 text-center"><%= @review.title %></h2><br><br>
   <div class="row">
-    <div class="col-md-3 offset-md-1">
-  	     <%= attachment_image_tag @review, :image_id, size: "250x250", fallback: "no_image.jpg" %>
+    <div class="col-md-3 mx-auto">
+  	     <%= attachment_image_tag @review, :image, size: "250x250", fallback: "no_image.jpg" %>
     </div>
-    <div class="col-md-8">
-      <p class="text-center">ユーザーネーム：<%= @review.user.first_name %></p>
-      <p class="text-center">投稿日時：<%= @review.created_at.strftime('%Y/%m/%d') %></p>
-      <div class="text-center">
-      	<p>
-      <h4>評価：<%= @review.rate %>点:<%= @review.title %></h4>
+    <div class="col-md-7 mx-auto">
+      <table class="table">
+        <tr>
+          <th>
+             <% if @review.title.present? %>
+              <%= @review.title %>
+             <% else %>
+              無題
+             <% end %>
+          </th>
+        </tr>
+        <tr>
+          <td class="text-center">
+            <%= @review.created_at.strftime('%Y/%m/%d') %>
+          </td>
+        </tr>
+        <tr>
+          <td class="text-center">
+            <% if @review.user.first_name.present? %>
+              <%= @review.user.first_name %>さん
+            <% else %>
+              <p>名無しさん</p>
+            <% end %>
+          </td>
+        </tr>
+        <tr>
+          <td class="text-center">
+            <h4>評価：<%= @review.rate %>点</h4>
             <!--星評価-->
             <div id="star-rate-<%= @review.id %>"></div>
              <script>
@@ -24,15 +46,22 @@
                     });
              </script>
             <!--/星評価-->
-  				</p>
-      </div><br>
-
-      <p class="text-center"><%= @review.explanation %></p>
-    </div>
-    <div class="actions col-md-4 offset-md-6">
-          	<%= link_to "編集する", edit_users_farmer_review_path(@review), class: "glyphicon glyphicon-pencil btn btn-outline-success btn-block" %>
-        	  <%= link_to "一覧に戻る", users_farmer_path(@farmer), class: "glyphicon glyphicon-pencil btn btn-outline-secondary btn-block" %>
-            <%= link_to "削除する", users_farmer_review_path(@review.farmer, @review), method: :delete, "data-confirm" => "Are you sure？", class: 'btn btn-outline-danger btn-block' %>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <% if @review.explanation.present? %>
+              <p><%= @review.explanation %></p>
+            <% else %>
+              <p>口コミなし。</p>
+            <% end %>
+          </td>
+        </tr>
+      </table>
+    <div class="actions col-md-4 offset-md-6 mb-5">
+          	<%= link_to "編集する", edit_users_farmer_review_path(@review), class: "glyphicon glyphicon-pencil btn btn-success btn-block" %>
+        	  <%= link_to "一覧に戻る", users_farmer_path(@farmer), class: "glyphicon glyphicon-pencil btn btn-secondary btn-block" %>
+            <%= link_to "削除する", users_farmer_review_path(@review.farmer, @review), method: :delete, "data-confirm" => "Are you sure？", class: 'glyphicon glyphicon-pencil btn btn-danger btn-block' %>
     </div>
   </div>
   </div>

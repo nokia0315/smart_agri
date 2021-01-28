@@ -1,6 +1,6 @@
 <div class="container-box">
 	<div class="row">
-		<div class="col-md-5 offset-md-1">
+		<div class="col-md-5 mx-auto mt-5">
 			<h5 class="head-line text-center title_h2">
 		  <% if @user.first_name.blank? %>
 	       <%= @user.email %>
@@ -10,18 +10,18 @@
 	      さんのマイページ</h5><br>
 	      <div class="row">
 	      	<div class="col-md-4">
-			   <%= attachment_image_tag @user, :image, format: 'jpeg', fallback: "no_image.jpg", size: '150x150' %>&nbsp&nbsp
-	        </div>
+			   <%= attachment_image_tag @user, :image, format: 'jpeg', fallback: "no_image.jpg", size: '150x150', class: "rounded-circle d-block mx-auto" %>
+			   </div>
 		      <div class="button col-md-8">
 				<% if @user == current_user %>
 	 				<%= link_to "編集する", edit_user_path(@user),class: "glyphicon glyphicon-pencil btn btn-success fas fa-user-edit"  %>
 	  				<%= link_to "パスワードの変更", edit_user_registration_path, class: "glyphicon glyphicon-pencil btn btn-warning fas fa-key" %>
 	 		  	<% end %><br><br>
-	 		  <div class="offset-md-2">
+	 		  <div class="col-md-12 mx-auto">
 	 		  	<table>
 	 		  	<tr>
 	 		  		<th>
-	 		  			<h3>自己紹介</h3>
+	 		  			自己紹介
 	 		  		</th>
 	 		  	</tr>
 	 		  	<tr>
@@ -29,7 +29,7 @@
 	 		  			<% if @user.introduction.present? %>
 	 		  		  <p class="intro-box"><%= @user.introduction %></p>
 	 		  		  <% else %>
-	 		  		   <p>こんにちは！</p>
+	 		  		   <h3>こんにちは！</h3>
 	 		  		   <% end %>
 	 		  		</td>
 	 		  	</tr>
@@ -66,8 +66,8 @@
 				</tbody>
 			</table>
 	 	</div>
-	 	<div class="col-md-5 offset-ml-auto pt-5">
-		 	<h2 class="text-center">キープ済みの求人</h2>
+	 	<div class="col-md-6 mx-auto pt-5">
+		 	<h2 class="text-center"><i class="fas fa-star"></i>キープ済みの求人</h2>
 		 	<% if @favos.present? %>
 		  <p class="text-center">
 		  	ページ:<%= @favos.current_page %> / <%= @favos.total_pages %><br>

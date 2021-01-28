@@ -16,12 +16,16 @@
 @import "bootstrap";
 @import 'font-awesome-sprockets';
 @import 'font-awesome';
-
+@import url('https://fonts.googleapis.com/css2?family=Potta+One&display=swap');
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
   // color: #6c6b6b;
+}
+
+h2,h3,h4{
+  font-family: 'Potta One', cursive;
 }
 
 header {
@@ -100,16 +104,18 @@ footer {
 }
 
 table{
-  border: 2px solid #000;
+  border: 5px double #006a6c;
   border-collapse: collapse;
 
 }
 
 table th{
   background-color: #ffdead;
-  color: #6c2463;
+  color: #000;
   border: 1px solid #000;
-
+  text-align:center;
+  font-family: 'Potta One', cursive;
+  font-size: 1.2em;
 }
 
 table td{
@@ -121,4 +127,11 @@ table td{
 
 .fa-fire{
   color: #ea5550;
+}
+
+.fa-star{
+  color: #e9bc00;
+}
+.btn-lg{
+  margin: 3px;
 }
