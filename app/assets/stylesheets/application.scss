@@ -75,9 +75,7 @@ footer {
   display: flex;
   margin: 5px;
   padding: 10px;
-  background-color: #ffffff;
 }
-
 .blog_box {
   width: 30vh;
   margin: 0 auto;
@@ -87,7 +85,7 @@ footer {
   display: inline-block;
 }
 
-.reviews_box {
+.review_box {
   width: 30vh;
   margin: 0 auto;
 }
@@ -118,5 +116,9 @@ table td{
   background-color: #faebd7;
   border: 1px solid #000;
   word-break: break-all;
+  width:45vh;
 }
 
+.fa-fire{
+  color: #ea5550;
+}

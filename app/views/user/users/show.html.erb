@@ -10,36 +10,33 @@
 	      さんのマイページ</h5><br>
 	      <div class="row">
 	      	<div class="col-md-4">
-					<%= attachment_image_tag @user, :image, format: 'jpeg', fallback: "no_image.jpg", size: '150x150' %>&nbsp&nbsp
+			   <%= attachment_image_tag @user, :image, format: 'jpeg', fallback: "no_image.jpg", size: '150x150' %>&nbsp&nbsp
 	        </div>
 		      <div class="button col-md-8">
-						<% if @user == current_user %>
-			 				<%= link_to "編集する", edit_user_path(@user),class: "glyphicon glyphicon-pencil btn btn-success fas fa-user-edit"  %>
-			  			<%= link_to "パスワードの変更", edit_user_registration_path, class: "glyphicon glyphicon-pencil btn btn-warning fas fa-key" %>
-			 		  <% end %>
-			 		  <br><br>
-			 		  <div class="offset-md-2">
-			 		  	<table>
-			 		  	<tr>
-			 		  		<th>
-			 		  			<h3>自己紹介</h3>
-			 		  		</th>
-			 		  	</tr>
-			 		  	<tr>
-			 		  		<td>
-			 		  			<% if @user.introduction.present? %>
-			 		  		  <p class="intro-box"><%= @user.introduction %></p>
-			 		  		  <% else %>
-			 		  		   <p>こんにちは！</p>
-			 		  		   <% end %>
-			 		  		</td>
-			 		  	</tr>
-			 		  </table>
-			 		 </div>
-					</div>
+				<% if @user == current_user %>
+	 				<%= link_to "編集する", edit_user_path(@user),class: "glyphicon glyphicon-pencil btn btn-success fas fa-user-edit"  %>
+	  				<%= link_to "パスワードの変更", edit_user_registration_path, class: "glyphicon glyphicon-pencil btn btn-warning fas fa-key" %>
+	 		  	<% end %><br><br>
+	 		  <div class="offset-md-2">
+	 		  	<table>
+	 		  	<tr>
+	 		  		<th>
+	 		  			<h3>自己紹介</h3>
+	 		  		</th>
+	 		  	</tr>
+	 		  	<tr>
+	 		  		<td>
+	 		  			<% if @user.introduction.present? %>
+	 		  		  <p class="intro-box"><%= @user.introduction %></p>
+	 		  		  <% else %>
+	 		  		   <p>こんにちは！</p>
+	 		  		   <% end %>
+	 		  		</td>
+	 		  	</tr>
+	 		  </table>
+	 		 </div>
+			</div>
 	      </div><br>
-
-
 			<table class="table" >
 				<tbody>
 					<tr>
@@ -70,7 +67,7 @@
 			</table>
 	 	</div>
 	 	<div class="col-md-5 offset-ml-auto pt-5">
-		 	<h2 class="text-center">お気に入りの求人</h2>
+		 	<h2 class="text-center">キープ済みの求人</h2>
 		 	<% if @favos.present? %>
 		  <p class="text-center">
 		  	ページ:<%= @favos.current_page %> / <%= @favos.total_pages %><br>
@@ -92,8 +89,8 @@
 	           <tr>
 	            <td>
 	              <%= link_to users_job_offer_path(favo.job_offer_id) do %>
-					       <%= favo.job_offer.title %>
-					      <% end %>
+			       <%= favo.job_offer.title %>
+			      <% end %>
 	            </td>
 	            <td><%= favo.job_offer.reward %></td>
 	            <td><%= favo.job_offer.genre.name %></td>
@@ -102,7 +99,7 @@
 	            <% end  %>
 	    				<%= paginate @favos, theme: 'twitter-bootstrap-4', class: "text-center" %>
 			<% else %>
-			　<h4 class="text-center">キープした求人はありません。</h4>
+			　<h4 class="text-center">キープ済みの求人はありません。</h4>
 			<% end  %>
 	           </tr>
 	          </tbody>

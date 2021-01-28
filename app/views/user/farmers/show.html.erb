@@ -1,20 +1,39 @@
 <div class="container-box">
   <div class="row">
-  	<div class="col-md-6">
-  		<br><br><h2 class="head-line title_h2"><%= @farmer.first_name %><%= @farmer.last_name %>さんのプロフィール<i class="far fa-user"></i></h2>
-      <p><%= attachment_image_tag @farmer, :image, fallback: "no_image.jpg", size: '250x250' %></p>
+  	<div class="col-md-4 offset-md-1">
+  		<br><br><h4 class="head-line title_h4"><i class="far fa-user "></i><%= @farmer.first_name %><%= @farmer.last_name %>さんのプロフィール</h4><br>
+      <p><%= attachment_image_tag @farmer, :image, fallback: "no_image.jpg", size: '150x150' %></p>
   	</div>
-  	<div class="col-md-6 text-left"><br><br>
-      <h3 class="head-line title_h3">レビュー件数&nbsp&nbsp&nbsp<%= @reviews.total_count %>件</h3><br>
-      <h3 class="head-line title_h3">自己紹介</h3><br>
-      <% if @farmer.introduction.present? %>
-      <p><%= @farmer.introduction %></p>
-      <% else %>
-  		　<h4 class="text-center">こんにちは！</h4>
-  		<% end  %>
+  	<div class="col-md-6 offset-md-1"><br><br>
+  	 <div class="review-count col-md-8 mx-auto">
+  	   <table class="table">
+  	     <tr>
+  	      <th class="text-center"><i class="far fa-file-pdf"></i>レビュー件数</th>
+  	     </tr>
+  	     <tr>
+  	       <td class="text-center"><%= @reviews.total_count %>件</td>
+  	     </tr>
+  	   </table>
+  	 </div>
+  	 <div class="col-md-8 mx-auto">
+  	   <table class="table">
+  	     <tr>
+  	      <th class="text-center">自己紹介</th>
+  	     </tr>
+  	     <tr>
+  	       <td class="text-center">
+  	        <% if @farmer.introduction.present? %>
+             <p class="intro-box"><%= @farmer.introduction %></p>
+            <% else %>
+        		 <h4 class="text-center">こんにちは！</h4>
+        		<% end  %>
+           </td>
+  	     </tr>
+  	   </table>
+  	 </div>
   	</div>
-  	<div class="col-md-6">
-  	  <table class="table table-bordered table-condensed" >
+  	<div class="col-md-5 offset-md-1">
+  	  <table class="table" >
     	 <tbody>
     		<tr>
     			<th class="text-center">住所</th>
@@ -33,27 +52,40 @@
   	</div>
   <br><br><br>
     <div class="col-md-12">
-     <br><br><h2 class="job_offer-headline head-line title_h2 text-center">ブログ</h2><br><br>
+     <br><br><h2 class="job_offer-headline head-line title_h2 text-center"><i class="fas fa-blog"></i>ブログ</h2><br><br>
      <% if @blogs.present? %>
      <div class="blogs">
   		<% @blogs.each do |blog| %>
-  		<div class="blog_box">
-  		 <%= link_to users_farmer_blog_path(users_farmer_id: @farmer.id, id: blog.id) do %>
-       <%= attachment_image_tag blog, :image, fallback: "no_image.jpg", size: '200x200' %>
-     <% end %>
-     <br>
-      <p>タイトル：<%= blog.title %></p>
-      <p>投稿日時：<%= blog.created_at.strftime('%Y/%m/%d') %></p>
-    </div>
+  		<div class="blog_box"><br>
+       <table class="table  table-condensed text-center">
+         <tr>
+           <th>
+             <%= blog.title %>
+           </th>
+         </tr>
+         <tr>
+           <td>
+             <%= blog.created_at.strftime('%Y/%m/%d') %>
+           </td>
+         </tr>
+         <tr>
+           <td>
+             <%= link_to users_farmer_blog_path(users_farmer_id: @farmer.id, id: blog.id) do %>
+              <%= attachment_image_tag blog, :image, fallback: "no_image.jpg", size: '200x200' %>
+             <% end %>
+           </td>
+         </tr>
+       </table>
+      </div>
       <% end %>
-      <%= paginate @blogs, theme: 'twitter-bootstrap-4', class: "text-center" %>
-     </div>
+      <%= paginate @blogs, theme: 'twitter-bootstrap-4' %>
+      </div>
      <% else %>
-  		　<h4 class="text-center">投稿したブログはありません。</h4>
-  		<% end  %>
+  		 <h4 class="text-center">投稿したブログはありません。</h4>
+  	 <% end  %>
    </div>
 
-   <div class="col-md-12">
+   <div class="col-md-7 mx-auto">
     <br><br><h4 class="job_offer-headline head-line title_h4 text-center"><%= @farmer.first_name %><%= @farmer.last_name %>さんの求人一覧</h4><br><br>
    <table class="table">
     <tr></tr>
@@ -84,46 +116,81 @@
   </div>
   <div class="col-md-12">
    <br><br><h4 class="job_offer-headline head-line title_h4 text-center"><%= @farmer.first_name %><%= @farmer.last_name %>さんのレビュー一覧</h4><br><br>
-   <p class="text-center">ページ:<%= @reviews.current_page %> / <%= @reviews.total_pages %><br>
+     <p class="text-center">ページ:<%= @reviews.current_page %> / <%= @reviews.total_pages %><br>
    <%= @reviews.total_count %>件中<%= @reviews.offset_value %>
    〜<%= @reviews.offset_value + @reviews.length %>件を表示しています。</p>
    <p>レビュー件数：<%= @reviews.total_count %></p>
-  <div class="reviews">
-  <% @reviews.each do |review| %>
-  <div class="reviews_box">
-   <%= link_to users_farmer_review_path(users_farmer_id: @farmer.id, id: review.id) do %>
-    <p><%= attachment_image_tag review.user, :image, :fill, 100, 100, format: 'jpeg', fallback: "no_image.jpg" %></p>
-    <%= review.user.first_name %>
-    <%= review.created_at.strftime('%Y/%m/%d') %><br>
-    <b class="mb-3">評価：<%= review.rate %>点 | <%= review.title %></b>
-    <% end %>
-    <!--星評価-->
-    <div class="rate-star">
-      <div id="star-rate-<%= review.id %>"></div>
-     <script>
-            $('#star-rate-<%= review.id %>').raty({
-              size: 36,
-              starOff:  '<%= asset_path('star-off.png') %>',
-              starOn : '<%= asset_path('star-on.png') %>',
-              starHalf: '<%= asset_path('star-half.png') %>',
-              half: true,
-              readOnly: true,
-              score: <%= review.rate %>,
-            });
-     </script>
-    </div>
-    </div>
-
-    <!--/星評価-->
-  <% end %>
-  </div>
-   <div class="text-center">
-      <%= paginate @reviews, theme: 'twitter-bootstrap-4', class: "text-center" %>
+     <% if @reviews.present? %>
+     <div class=" reviews">
+  		<% @reviews.each do |review| %>
+  		<div class=" review_box"><br>
+       <table class="table text-center">
+         <tr>
+           <th>
+             <h3>
+               <% if review.title.present? %>
+                <%= review.title %>
+               <% else %>
+                無題
+               <% end %>
+             </h3>
+           </th>
+         </tr>
+         <tr>
+           <th>
+             <b class="mb-3">評価：<%= review.rate %>点 </b>
+             　<div class="rate-star">
+                <div id="star-rate-<%= review.id %>"></div>
+                 <script>
+                    $('#star-rate-<%= review.id %>').raty({
+                      size: 36,
+                      starOff:  '<%= asset_path('star-off.png') %>',
+                      starOn : '<%= asset_path('star-on.png') %>',
+                      starHalf: '<%= asset_path('star-half.png') %>',
+                      half: true,
+                      readOnly: true,
+                      score: <%= review.rate %>,
+                    });
+                 </script>
+                </div>
+              </div>
+           </th>
+         </tr>
+         <tr>
+           <td>
+             <% if review.user.first_name.present? %>
+              <%= review.user.first_name %>さん
+             <% else %>
+              <p>名無しさん</p>
+              <% end %>
+           </td>
+         </tr>
+         <tr>
+           <td>
+             <%= review.created_at.strftime('%Y/%m/%d') %><br>
+           </td>
+         </tr>
+         <tr>
+           <td>
+              <%= link_to users_farmer_review_path(users_farmer_id: @farmer.id, id: review.id) do %>
+      　　　　　　<p><%= attachment_image_tag review.user, :image, :fill, 100, 100, format: 'jpeg', fallback: "no_image.jpg" %></p>
+           　　<% end %>
+           </td>
+         </tr>
+       </table>
+      </div>
+      <% end %>
+     </div>
+     <%= paginate @reviews, theme: 'twitter-bootstrap-4', class: "text-center" %>
+     <% else %>
+  		 <h4 class="text-center">投稿したブログはありません。</h4>
+  	 <% end  %>
+  	 <div class="text-center mt-5">
     <%= link_to "求人一覧", users_job_offers_path, class: "glyphicon glyphicon-shopping-cart btn-lg btn-info" %>
     <%= link_to "レビュー投稿", new_users_farmer_review_path(@farmer), class: "glyphicon glyphicon-pencil btn-lg btn-success center-block" %><br><br>
    </div>
-  </div>
-</div>
+   </div>
+  </div><br>
 
 
 
