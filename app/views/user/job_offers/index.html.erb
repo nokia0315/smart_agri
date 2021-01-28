@@ -1,42 +1,55 @@
 <div class="container-box">
   <div class="row">
-  <div class="col-md-3">
-    <div class="name-search">
-      <% if user_signed_in? %>
-        <h5>求人検索</h5>
-        <%= form_with url: search_search_path, method: :get, local: true do |f| %>
-          <%= f.text_field 'search[value]', size: "26x4" %><br>
-          <span class="search-button col-xs-12 text-right">
+  <div class="col-md-3 offset-md-1">
+    <% if user_signed_in? %>
+    <div class="name-search pt-5">
+      <table class="table">
+        <tr>
+          <th class="text-center">
+            <i class="fas fa-search"></i>求人検索
+          </th>
+        </tr>
+        <tr>
+          <td>
+            <%= form_with url: search_search_path, method: :get, local: true do |f| %>
+            <%= f.text_field 'search[value]', size: "26x4" %><br>
+            <span class="search-button col-xs-12 text-right">
             <%= f.select 'search[how]', options_for_select({ "部分一致" => "partical", "前方一致" => "forward", "後方一致" => "backward", "完全一致" => "match" }) %>
             <%= f.submit :"検索" %>
           </span>
         <% end %>
-      <% end %>
-    </div>
-    <table class="table table-bordered genre-table">
-      <thead>
-        <tr>
-          <th class="text-center">募集形態で検索</th>
-        </tr>
-      </thead>
-      <tbody>
-      <% @genres.each do |genre| %>
-        <tr>
-          <td class="text-center">
-            <%= link_to genre.name, search_search_path('search[value]': genre.id, 'search[how]': "match") %>
           </td>
         </tr>
-      <% end %>
-      </tbody>
-    </table>
+      </table>
+    </div>
+    <% end %>
+    <div class="col-md-10 pt-5">
+      <table class="table genre-table">
+            <thead>
+              <tr>
+                <th class="text-center">募集形態で検索</th>
+              </tr>
+            </thead>
+            <tbody>
+            <% @genres.each do |genre| %>
+              <tr>
+                <td class="text-center">
+                  <%= link_to genre.name, search_search_path('search[value]': genre.id, 'search[how]': "match") %>
+                </td>
+              </tr>
+            <% end %>
+            </tbody>
+          </table>
+    </div>
+
    </div>
    <div class="col-md-7">
-    <h2 class="job_offer-headline head-line title_h2 text-center">求人一覧</h2>
+    <h2 class="job_offer-headline head-line title_h2 text-center pt-5"><i class="fas fa-indent"></i>求人一覧</h2>
 		<p class="text-center">
 		  ページ:<%= @job_offers.current_page %> / <%= @job_offers.total_pages %><br>
       <%= @job_offers.total_count %>件中<%= @job_offers.offset_value %>〜<%= @job_offers.offset_value + @job_offers.length %>件を表示しています。
 		</p>
-		<div class="clearfix job_offer-box">
+		<div class="clearfix job_offer-box mb-5">
         <table class="table">
          <thead>
           <tr>
@@ -80,36 +93,46 @@
            </tr>
           </tbody>
         </table>
+        <div class="rank-job_offer mt-5">
+          <h2 class="job_offer-headline head-line title_h2 text-center"><i class="fas fa-fire"></i>人気求人<i class="fas fa-fire"></i></h2><br>
+                  <table class="table">
+                    <thead>
+                    <tr>
+                      <th class="text-center">求人名</th>
+                      <th class="text-center">報酬</th>
+                      <th class="text-center">募集形態</th>
+                      <th class="text-center">募集状況</th>
+                      <th class="text-center">農業者</th>
+                      <th class="text-center"></th>
+                    </tr>
+                   </thead>
+                    <% @all_ranks.each.with_index(1) do |job_offer, i| %>
+                    <tr>
+                      <td>
+                        <%= link_to users_job_offer_path(job_offer) do %>
+                          <%= job_offer.title %>
+                        <% end %>
+                      </td>
+                      <td><%= job_offer.reward %></td>
+                      <td><%= job_offer.genre.name %></td>
+                      <td><%= job_offer.is_valid %></td>
+                      <td> <%= link_to job_offer.farmer.first_name, users_farmer_path(job_offer.farmer.id) %></td>
+                      <td>
+                        <% if job_offer.favorited_by?(current_user) %>
+                            <%= link_to users_job_offer_favos_path(job_offer), method: :delete do %>
+                              <i class="fas fa-star"></i><%= job_offer.favos.count %> キープ
+                            <% end %>
 
-        <h2 class="job_offer-headline head-line title_h2 text-center">人気求人</h2><br>
-        <table class="table">
-          <% @all_ranks.each.with_index(1) do |job_offer, i| %>
-          <tr>
-            <td>
-              <%= link_to users_job_offer_path(job_offer) do %>
-                <%= job_offer.title %>
-              <% end %>
-            </td>
-            <td><%= job_offer.explanation %></td>
-            <td><%= job_offer.reward %></td>
-            <td><%= job_offer.genre.name %></td>
-            <td><%= job_offer.is_valid %></td>
-            <td> <%= link_to job_offer.farmer.first_name, users_farmer_path(job_offer.farmer.id) %></td>
-            <td>
-              <% if job_offer.favorited_by?(current_user) %>
-                  <%= link_to users_job_offer_favos_path(job_offer), method: :delete do %>
-                    <i class="fas fa-star"></i><%= job_offer.favos.count %> キープ
-                  <% end %>
-
-              <% else %>
-                  <%= link_to users_job_offer_favos_path(job_offer), method: :post do %>
-                    <i class="far fa-star"></i><%= job_offer.favos.count %> キープ
-                  <% end %>
-              <% end %>
-            </td>
-           </tr>
-          <% end %>
-      </table>
+                        <% else %>
+                            <%= link_to users_job_offer_favos_path(job_offer), method: :post do %>
+                              <i class="far fa-star"></i><%= job_offer.favos.count %> キープ
+                            <% end %>
+                        <% end %>
+                      </td>
+                     </tr>
+                    <% end %>
+                </table>
+        </div>
     </div>
   </div>
 </div>
