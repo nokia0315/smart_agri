@@ -36,13 +36,13 @@
                 </li>
               <% elsif farmer_signed_in? %>
                 <li>
-                  <%= link_to "TOP", top_path, class: 'btn btn-outline-success fas fa-laptop-house' %>
+                  <%= link_to "TOP", top_path, class: 'btn-lg btn-success fas fa-laptop-house' %>
                 </li>
                 <li>
-                  <%= link_to "求人一覧", farmers_job_offers_path, class: 'btn btn-outline-success fas fa-indent' %>
+                  <%= link_to "求人一覧", farmers_job_offers_path, class: 'btn-lg btn-success fas fa-indent' %>
                 </li>
                 <li>
-                  <%= link_to "マイページ", farmer_path(current_farmer.id), class: 'btn btn-outline-success fas fa-house-user' %>
+                  <%= link_to "マイページ", farmer_path(current_farmer.id), class: 'btn-lg btn-success fas fa-house-user' %>
                 </li>
                 <li>
                   <%= link_to "ログアウト", destroy_farmer_session_path, method: :delete, class: 'btn-lg btn-dark fas fa-sign-out-alt' %>
@@ -73,19 +73,19 @@
 
 
                 <li>
-                  <%= link_to "SmartAgriとは", new_user_registration_path, class: "btn btn-outline-danger" %>
+                  <%= link_to "SmartAgriとは", new_user_registration_path, class: "btn-lg btn-danger" %>
                 </li>
                 <li>
-                  <%= link_to "新規会員登録", new_user_registration_path, class: "btn btn-outline-info" %>
+                  <%= link_to "新規会員登録", new_user_registration_path, class: "btn-lg btn-info" %>
                 </li>
                 <li>
-                  <%= link_to "会員ログイン", new_user_session_path, class: "btn btn-outline-success" %>
+                  <%= link_to "会員ログイン", new_user_session_path, class: "btn-lg btn-success" %>
                 </li>
                 <li>
-                  <%#= link_to "新規農業者登録", new_farmer_registration_path, class: "btn btn-outline-info" %>
+                  <%#= link_to "新規農業者登録", new_farmer_registration_path, class: "btn-lg btn-info" %>
                 </li>
                 <li>
-                  <%= link_to "農家の方はこちら", new_farmer_session_path, class: "btn btn-outline-warning" %>
+                  <%= link_to "農家の方はこちら", new_farmer_session_path, class: "btn-lg btn-warning" %>
                 </li>
                 <li>
                   <%#= link_to "新規管理者登録", new_admin_registration_path %>

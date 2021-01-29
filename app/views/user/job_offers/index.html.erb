@@ -108,7 +108,7 @@
                    </thead>
                     <% @all_ranks.each.with_index(1) do |job_offer, i| %>
                     <tr>
-                      <td>
+                      <td><i class="fas fa-crown"></i>第<%= i %>位<br>
                         <%= link_to users_job_offer_path(job_offer) do %>
                           <%= job_offer.title %>
                         <% end %>
