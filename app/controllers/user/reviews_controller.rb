@@ -11,6 +11,7 @@ class User::ReviewsController < ApplicationController
   def create
     farmer = Farmer.find(params[:users_farmer_id])
     review = current_user.reviews.new(review_params)
+    review.score = Language.get_data(review_params[:explanation])
     review.farmer_id = farmer.id
     review.save
     redirect_to users_farmer_review_path(users_farmer_id: farmer.id, id: review.id)

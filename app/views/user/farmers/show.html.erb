@@ -175,6 +175,9 @@
            </td>
          </tr>
          <tr>
+          <td><%= review.score %></td>
+         </tr>
+         <tr>
            <td>
                <%= link_to users_farmer_review_path(users_farmer_id: @farmer.id, id: review.id) do %>
                 <%= attachment_image_tag review, :image, size: "200x200", fallback: "no_image.jpg" %>
