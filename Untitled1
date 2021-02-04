@@ -1,0 +1,14 @@
+検索
+・controller か model の中で処理を書く
+・where をつかう
+・必要であれば include か join を使ってモデル同士を結合する
+集計
+・group をつかう
+・User.where(age: 25).group(:wight)
+平均
+・average を使う
+・User.where(age: 25).average(:wight)
+
+検索のテストをしたいときや実験は
+rails c
+
