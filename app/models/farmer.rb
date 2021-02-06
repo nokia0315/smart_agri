@@ -36,7 +36,7 @@ class Farmer < ApplicationRecord
     elsif farmer_avg_score >= 0.5
       return "シルバーファーマー"
     else
-      return "normal"
+      return "ノーマル"
     end
   end
 end
