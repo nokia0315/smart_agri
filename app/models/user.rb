@@ -16,6 +16,18 @@ class User < ApplicationRecord
     end
   end
 
+  def farmer_title
+    if self.average(:score).round(2) >= 0.7
+      return "ゴールドファーマー"
+    elsif self.average(:score).round(2) >= 0.5
+      return "シルバーファーマー"
+    elsif self.average(:score).round(2) >= 0.3
+      return "ブロンズファーマー"
+    elsif self.average(:score).round(2).blank?
+      return ""
+    end
+  end
+
   # # 自分がフォローされる（被フォロー）側の関係性
   # has_many :reverse_of_relationships, class_name: "Relationship", foreign_key: "followed_id", dependent: :destroy
   # # 自分がフォローする（与フォロー）側の関係性

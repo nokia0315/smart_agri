@@ -1,7 +1,14 @@
 <div class="container-box">
   <div class="row">
   	<div class="col-md-4 offset-md-1">
-  		<br><br><h4 class="head-line title_h4"><i class="far fa-user "></i><%= @farmer.first_name %><%= @farmer.last_name %>さんのプロフィール</h4><br>
+  		<br><br><h4 class="head-line title_h4"><i class="far fa-user "></i><%= @farmer.first_name %>さんのプロフィール</h4><br>
+  		<% if @title == "ゴールドファーマー" %>
+  		<%= image_tag('gold_crown.png', :size => '100x100', class: "d-block mx-auto") %>
+  		<% elsif @title == "シルバーファーマー"%>
+  		<%= image_tag('silver_crown.png', :size => '100x100', class: "d-block mx-auto") %>
+  		<% else %>
+  		<% end %>
+
       <p><%= attachment_image_tag @farmer, :image, fallback: "no_image.jpg", size: '150x150', class: "rounded-circle d-block mx-auto" %></p>
   	</div>
   	<div class="col-md-6 offset-md-1"><br><br>
@@ -173,9 +180,6 @@
            <td>
              <%= review.created_at.strftime('%Y/%m/%d') %><br>
            </td>
-         </tr>
-         <tr>
-          <td><%= review.score %></td>
          </tr>
          <tr>
            <td>
