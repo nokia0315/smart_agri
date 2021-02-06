@@ -30,7 +30,13 @@ class Farmer < ApplicationRecord
   attachment :image
 
   def farmer_title
-    farmer_avg_score = self.reviews.average(:score).round(2)
+    farmer_avg_score = self.reviews.average(:score)
+    if farmer_avg_score.nil?
+      farmer_avg_score = 0
+    else
+      farmer_avg_score = farmer_avg_score.round(2)
+    end
+
     if farmer_avg_score >= 0.7
       return "ゴールドファーマー"
     elsif farmer_avg_score >= 0.5
