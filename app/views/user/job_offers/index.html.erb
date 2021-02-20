@@ -46,31 +46,38 @@
         <table class="table">
           <% @all_ranks.each.with_index(1) do |job_offer, i| %>
           <tr>
-            <td>
-              <h6 class="text-center"><i class="fas fa-crown"></i>第<%= i %>位</h6><br>
-              <%= link_to users_job_offer_path(job_offer) do %>
-              <h4 class="text-center"><%= job_offer.title %></h4><br>
-              <%= attachment_image_tag job_offer, :image_id, fallback: "no_image.jpg", size: '200x200' ,class: "d-block mx-auto"%>
-          <% end %>
+            <td colspan="3">
+              <h4 class="text-center"><i class="fas fa-crown"></i>第<%= i %>位</h4>
+              <h4 class="text-center">
+                <%= link_to users_farmer_path(job_offer.farmer.id) do %>
+                  <%= attachment_image_tag job_offer.farmer, :image, size: '50x50', format: 'jpeg', fallback: "no_image.jpg", class: "rounded-circle " %>
+                <% end %>
+                <%= link_to users_job_offer_path(job_offer) do %>
+                  <%= job_offer.title %>
+              </h4>
+                  <%= attachment_image_tag job_offer, :image_id, fallback: "no_image.jpg", size: '150x150' ,class: "d-block mx-auto"%>
+                <% end %>
             </td>
           </tr>
-          <tr class="job_offer_detail">
-            <td class="text-center">
+          <tr>
+            <td class="job_offer_detail text-center">
               <i class="fas fa-yen-sign">：<%= job_offer.reward %></i><br>
               <i class="far fa-clock">：<%= job_offer.genre.name %></i><br>
-              状況：<%= job_offer.is_valid %><br>
+              状況：<%= job_offer.is_valid %>
+            </td>
+            <td colspan="2" class="favo_button">
               <% if job_offer.favorited_by?(current_user) %>
                 <%= link_to users_job_offer_favos_path(job_offer), method: :delete do %>
-                  <i class="fas fa-star"></i><%= job_offer.favos.count %> キープ
+                 <i class="fas fa-star btn-lg btn-warning fas fa-sign-out-alt"><%= job_offer.favos.count %></i>
                 <% end %>
-              <% else %>
+               </p>
+               <% else %>
+               <p>
                 <%= link_to users_job_offer_favos_path(job_offer), method: :post do %>
-                  <i class="far fa-star"></i><%= job_offer.favos.count %> キープ<br>
+                 <i class="far fa-star btn-lg btn-light fas fa-sign-out-alt"><%= job_offer.favos.count %></i>
                 <% end %>
-              <% end %>
-              <br>
-              <%= attachment_image_tag job_offer.farmer, :image, size: '50x50', format: 'jpeg', fallback: "no_image.jpg", class: "rounded-circle " %><br>
             </td>
+              <% end %>
            </tr>
           <% end %>
       </table>
@@ -78,46 +85,49 @@
    </div>
    <div class="col-md-4 offset-md-2">
     <h2 class="job_offer-headline head-line title_h2 text-center pt-5"><i class="fas fa-indent"></i>求人一覧</h2>
-		<p class="text-center">
+		<h5 class="text-center">
 		  ページ:<%= @job_offers.current_page %> / <%= @job_offers.total_pages %><br>
       <%= @job_offers.total_count %>件中<%= @job_offers.offset_value %>〜<%= @job_offers.offset_value + @job_offers.length %>件を表示しています。
-		</p>
+		</h5>
 		<div class="job_offer-box mb-3">
         <table class="table">
           <% @job_offers.each do |job_offer| %>
            <tr>
-            <td>
-
-              <%= link_to users_job_offer_path(job_offer) do %>
-                <h4 class="text-center"><%= job_offer.title %></h4><br>
-                 <%= attachment_image_tag job_offer, :image_id, fallback: "no_image.jpg", size: '200x200' ,class: "d-block mx-auto"%>
+            <td colspan="2">
+              <h4 class="text-center">
+                <%= link_to users_farmer_path(job_offer.farmer.id) do %>
+                <%= attachment_image_tag job_offer.farmer, :image, size: '50x50', format: 'jpeg', fallback: "no_image.jpg", class: "rounded-circle" %>
+                <% end %>
+                <%= link_to users_job_offer_path(job_offer) do %>
+                <%= job_offer.title %>
+              </h4>
+               <%= attachment_image_tag job_offer, :image_id, fallback: "no_image.jpg", size: '200x200' ,class: "d-block mx-auto"%>
               <% end %>
             </td>
-            </tr>
+          </tr>
             <tr>
-             <td class="text-center">
+             <td class="job_offer_detail text-center">
                <i class="fas fa-yen-sign">：<%= job_offer.reward %></i><br>
                <i class="far fa-clock">：<%= job_offer.genre.name %></i><br>
                状況：<%= job_offer.is_valid %><br>
+             </td>
+             <td class="favo_button text-right">
                <% if job_offer.favorited_by?(current_user) %>
                  <p>
                   <%= link_to users_job_offer_favos_path(job_offer), method: :delete do %>
-                   <i class="fas fa-star"></i><%= job_offer.favos.count %> キープ
+                   <i class="fas fa-star btn-lg btn-warning fas fa-sign-out-alt"><%= job_offer.favos.count %></i>
                   <% end %>
                  </p>
                  <% else %>
                  <p>
                   <%= link_to users_job_offer_favos_path(job_offer), method: :post do %>
-                   <i class="far fa-star"></i><%= job_offer.favos.count %> キープ
+                   <i class="far fa-star btn-lg btn-light fas fa-sign-out-alt"><%= job_offer.favos.count %></i>
                   <% end %>
                  </p>
                <% end %>
-               <%= link_to users_farmer_path(job_offer.farmer.id) do %>
-               <%= attachment_image_tag job_offer.farmer, :image, size: '50x50', format: 'jpeg', fallback: "no_image.jpg", class: "rounded-circle" %>
-               <% end %>
-             </td>
+              </td>
           </tr>
-            <% end %>
+        <% end %>
         </table>
         <%= paginate @job_offers, theme: 'twitter-bootstrap-4', class: "text-center" %>
     </div>
