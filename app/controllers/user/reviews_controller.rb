@@ -23,8 +23,9 @@ class User::ReviewsController < ApplicationController
 
   def update
     review = Review.find(params[:id])
+    review.score = Language.get_data(review_params[:explanation])
     if review.update(review_params)
-      flash[:success] = "レビュー内容をを変更しました"
+      flash[:success] = "レビュー内容を変更しました"
       redirect_to users_farmer_review_path(review)
     else
       render :edit
