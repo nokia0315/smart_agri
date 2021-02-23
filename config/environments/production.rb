@@ -89,7 +89,7 @@ Rails.application.configure do
     config.logger    = ActiveSupport::TaggedLogging.new(logger)
   end
 
-  # Do not dump schema after migrations.
+  ## Do not dump schema after migrations.
   config.active_record.dump_schema_after_migration = false
 
   config.action_mailer.raise_delivery_errors = true
