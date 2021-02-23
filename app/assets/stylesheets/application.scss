@@ -125,6 +125,13 @@ table td{
   width:45vh;
 }
 
+ .job_offer_img,.job_offer_detail{
+  border-right: none;
+}
+
+.job_offer_detail_mp,.favo_button{
+  border-left: none;
+}
 .fa-fire{
   color: #ea5550;
 }
