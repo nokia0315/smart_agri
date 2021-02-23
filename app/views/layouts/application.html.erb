@@ -70,8 +70,6 @@
                   <%= link_to "ログアウト", destroy_admin_session_path, method: :delete %>
                 </li>
               <% else %>
-
-
                 <li>
                   <%#= link_to "SmartAgriとは", new_user_registration_path, class: "btn-lg btn-danger" %>
                 </li>
@@ -99,12 +97,11 @@
         </div>
        </nav>
     </header>
-
     <div id="flash">
       <%= render "layouts/flash" %>
     </div>
 
-    <main class="mb-auto">
+    <main>
       <div class="container">
           <%= yield %>
       </div>

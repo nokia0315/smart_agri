@@ -1,15 +1,14 @@
 <div class="container-box">
   <div class="row">
   	<div class="col-md-4 offset-md-1">
-  		<br><br><h4 class="head-line title_h4"><i class="far fa-user "></i><%= @farmer.first_name %>さんのプロフィール</h4><br>
+  		<br><br><h4 class="head-line title_h4 text-center"><i class="far fa-user "></i><%= @farmer.first_name %>さんのプロフィール</h4><br>
   		<% if @title == "ゴールドファーマー" %>
   		<%= image_tag('gold_crown.png', :size => '100x100', class: "d-block mx-auto") %>
   		<% elsif @title == "シルバーファーマー"%>
   		<%= image_tag('silver_crown.png', :size => '100x100', class: "d-block mx-auto") %>
   		<% else %>
   		<% end %>
-
-      <p><%= attachment_image_tag @farmer, :image, fallback: "no_image.jpg", size: '150x150', class: "rounded-circle d-block mx-auto" %></p>
+   <p><%= attachment_image_tag @farmer, :image, fallback: "no_image.jpg", size: '150x150', class: "rounded-circle d-block mx-auto" %></p>
   	</div>
   	<div class="col-md-6 offset-md-1"><br><br>
   	 <div class="review-count col-md-8 mx-auto">
@@ -43,15 +42,15 @@
   	  <table class="table" >
     	 <tbody>
     		<tr>
-    			<th class="text-center">住所</th>
+    			<th class="text-center"><i class="fas fa-map-marker-alt fa-lg"></i></th>
     			<td class="text-left"><%= @farmer.residence %></td>
     		</tr>
     		<tr>
-    			<th class="text-center">電話番号</th>
+    			<th class="text-center"><i class="fas fa-phone-alt fa-lg"></i></th>
     			<td class="text-left"><%= @farmer.phone_number %></td>
     		</tr>
     		<tr>
-    			<th class="text-center">メールアドレス</th>
+    			<th class="text-center"><i class="fas fa-mail-bulk fa-lg"></i></th>
     			<td class="text-left"><%= @farmer.email %></td>
     		</tr>
     	 </tbody>
@@ -72,11 +71,7 @@
          </tr>
          <tr>
            <td>
-             <%= blog.created_at.strftime('%Y/%m/%d') %>
-           </td>
-         </tr>
-         <tr>
-           <td>
+             <%= blog.created_at.strftime('%Y/%m/%d') %><br><br>
              <%= link_to users_farmer_blog_path(users_farmer_id: @farmer.id, id: blog.id) do %>
               <%= attachment_image_tag blog, :image, fallback: "no_image.jpg", size: '200x200' %>
              <% end %>
@@ -123,72 +118,56 @@
   </div>
   <div class="col-md-12">
    <br><br><h4 class="job_offer-headline head-line title_h4 text-center"><%= @farmer.first_name %><%= @farmer.last_name %>さんのレビュー</h4><br><br>
-     <p class="text-center">ページ:<%= @reviews.current_page %> / <%= @reviews.total_pages %><br>
-   <%= @reviews.total_count %>件中<%= @reviews.offset_value %>
-   〜<%= @reviews.offset_value + @reviews.length %>件を表示しています。<br>レビュー件数：<%= @reviews.total_count %></p>
+     <h5 class="text-center">ページ:<%= @reviews.current_page %> / <%= @reviews.total_pages %><br>
+      <%= @reviews.total_count %>件中<%= @reviews.offset_value %>
+      〜<%= @reviews.offset_value + @reviews.length %>件を表示しています。<br>レビュー件数：<%= @reviews.total_count %>
+     </h5>
      <% if @reviews.present? %>
      <div class=" reviews">
-  		<% @reviews.each do |review| %>
-  		<div class=" review_box"><br>
-       <table class="table text-center">
-         <tr>
-           <th>
-             <h3>
-               <%= link_to users_farmer_review_path(users_farmer_id: @farmer.id, id: review.id) do %>
-                   <% if review.title.present? %>
-                    <%= review.title %>
-                   <% else %>
-                    無題
-                   <% end %>
-               <% end %>
-             </h3>
-           </th>
-         </tr>
-         <tr>
-           <th>
-             <b class="mb-3">評価：<%= review.rate %>点 </b>
-              <div class="rate-star">
-                <div id="star-rate-<%= review.id %>"></div>
-                 <script>
-                    $('#star-rate-<%= review.id %>').raty({
-                      size: 36,
-                      starOff:  '<%= asset_path('star-off.png') %>',
-                      starOn : '<%= asset_path('star-on.png') %>',
-                      starHalf: '<%= asset_path('star-half.png') %>',
-                      half: true,
-                      readOnly: true,
-                      score: <%= review.rate %>,
-                    });
-                 </script>
-                </div>
-              </div>
-           </th>
-         </tr>
-         <tr>
-           <td>
-             <%= link_to users_farmer_review_path(users_farmer_id: @farmer.id, id: review.id) do %>
-              <%= attachment_image_tag review.user, :image, size: '50x50', format: 'jpeg', fallback: "no_image.jpg", class: "rounded-circle d-block mx-auto" %>
-            <% end %>
-             <% if review.user.first_name.present? %>
-              <p class="text-center"><%= review.user.first_name %>さん</p>
-             <% else %>
-              <p>名無しさん</p>
+   		<% @reviews.each do |review| %>
+   		<div class=" review_box"><br>
+        <table class="table text-center">
+          <tr>
+            <th>
+              <h3>
+                <%= link_to users_farmer_review_path(users_farmer_id: @farmer.id, id: review.id) do %>
+                    <% if review.title.present? %>
+                     <%= review.title %>
+                    <% else %>
+                     無題
+                    <% end %>
+                <% end %>
+              </h3>
+              <b class="mb-3">評価：<%= review.rate %>点 </b>
+               <div class="rate-star">
+                 <div id="star-rate-<%= review.id %>"></div>
+                  <script>
+                     $('#star-rate-<%= review.id %>').raty({
+                       size: 36,
+                       starOff:  '<%= asset_path('star-off.png') %>',
+                       starOn : '<%= asset_path('star-on.png') %>',
+                       starHalf: '<%= asset_path('star-half.png') %>',
+                       half: true,
+                       readOnly: true,
+                       score: <%= review.rate %>,
+                     });
+                  </script>
+                 </div>
+               </div>
+            </th>
+          </tr>
+          <tr>
+            <td>
+              <%= link_to users_farmer_review_path(users_farmer_id: @farmer.id, id: review.id) do %>
+               <%= attachment_image_tag review.user, :image, size: '50x50', format: 'jpeg', fallback: "no_image.jpg", class: "rounded-circle d-block mx-auto" %>
              <% end %>
-           </td>
-         </tr>
-         <tr>
-           <td>
-             <%= review.created_at.strftime('%Y/%m/%d') %><br>
-           </td>
-         </tr>
-         <tr>
-           <td>
-               <%= link_to users_farmer_review_path(users_farmer_id: @farmer.id, id: review.id) do %>
-                <%= attachment_image_tag review, :image, size: "200x200", fallback: "no_image.jpg" %>
-               <% end %>
-           </td>
-         </tr>
-       </table>
+              <%= review.created_at.strftime('%Y/%m/%d') %><br><br>
+                <%= link_to users_farmer_review_path(users_farmer_id: @farmer.id, id: review.id) do %>
+                 <%= attachment_image_tag review, :image, size: "200x200", fallback: "no_image.jpg" %>
+                <% end %>
+            </td>
+          </tr>
+        </table>
       </div>
       <% end %>
      </div>

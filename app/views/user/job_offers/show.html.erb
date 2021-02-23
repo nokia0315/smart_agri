@@ -1,36 +1,26 @@
 	<div class="container-box">
 	  <div class="row">
-	  <div class="col-md-4">
+	  <div class="col-md-4 mt-5 ml-5">
 	     <%= attachment_image_tag @job_offer, :image_id, size: "250x250", fallback: "no_image.jpg" %>
     </div>
-    <div class="col-md-8">
-    	<h2 class="job_offer-headline head-line title_h2 text-center">	<%= @job_offer.title %></h2><br>
+    <div class="col-md-6 mx-auto">
+    	<h2 class="job_offer-headline head-line title_h2 text-center mt-5">	<%= @job_offer.title %></h2><br>
     	<table class="table">
     		<tr>
-    			<th class="text-center">
-    				説明
-    			</th>
-    			<td>
+    			<td class="job_offer_detail text-center">
+    			  <i class="fas fa-yen-sign">:<%= @job_offer.reward %></i><br>
+    				<i class="far fa-clock">:<%= @job_offer.genre.name %></i><br>
+    				状況:<%= @job_offer.is_valid %>
+    			</td>
+    			<td class="farmer_img text-center">
+            <%= link_to users_farmer_path(@job_offer.farmer.id) do %>
+              <%= attachment_image_tag @job_offer.farmer, :image, size: '100x100', format: 'jpeg', fallback: "no_image.jpg", class: "rounded-circle " %>
+            <% end %>
+    			</td>
+    		</tr>
+    		<tr>
+    			<td colspan="2">
     				<%= @job_offer.explanation %>
-    			</td>
-    		</tr>
-    		<tr>
-    			<th class="text-center">
-    				<i class="fas fa-yen-sign"></i><br>
-    				<i class="far fa-clock"></i><br>
-    				状況
-    			</th>
-    			<td>
-    				<%= @job_offer.reward %>
-    				<%= @job_offer.is_valid %>
-    			</td>
-    		</tr>
-    		<tr>
-    			<th class="text-center">
-    				農業者
-    			</th>
-    			<td>
-    				<%= link_to @job_offer.farmer.first_name, users_farmer_path(@job_offer.farmer.id) %>
     			</td>
     		</tr>
     	</table>
@@ -38,20 +28,22 @@
       	<% if @job_offer.favorited_by?(current_user) %>
        <p>
       <%= link_to users_job_offer_favos_path(@job_offer), method: :delete do %>
-        <i class="fas fa-star fas fa-star btn-lg btn-warning fas fa-sign-out-alt"><%= @job_offer.favos.count %> </i>
+
+        <i class="fas fa-star fa-2x btn-block btn-warning fas fa-sign-out-alt "><%= @job_offer.favos.count %></i>
+
       <% end %>
        </p>
       <% else %>
        <p>
       <%= link_to users_job_offer_favos_path(@job_offer), method: :post do %>
-        <i class="far fa-star far fa-star btn-lg btn-light fas fa-sign-out-alt" ><%= @job_offer.favos.count %> </i>
+        <i class="far fa-star fa-2x btn-block btn-light fas fa-sign-out-alt" ><%= @job_offer.favos.count %> </i>
       <% end %>
        </p>
       <% end %>
       </div>
 
-      <div class="col-md-12 text-right">
-    	  <%= link_to "一覧に戻る", users_job_offers_path, class: "glyphicon glyphicon-pencil btn btn-success" %>
+      <div class="col-md-12 text-right mb-5">
+    	  <%= link_to "一覧に戻る", users_job_offers_path, class: "glyphicon glyphicon-pencil btn btn-success btn-block" %>
       </div>
   	</div>
 	</div>
