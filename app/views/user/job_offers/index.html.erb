@@ -1,33 +1,31 @@
 <div class="container-box">
   <div class="row">
-  <div class="col-md-3 offset-md-1">
-    <% if user_signed_in? %>
+  <div class="col-md-3 mx-auto">
     <div class="name-search pt-5">
       <table class="table">
         <tr>
           <th class="text-center">
-            <i class="fas fa-search"></i>求人検索
+            <i class="fas fa-search">求人検索</i>
           </th>
         </tr>
         <tr>
-          <td>
+          <td class="text-center">
             <%= form_with url: search_search_path, method: :get, local: true do |f| %>
-            <%= f.text_field 'search[value]', size: "26x4" %><br>
-            <span class="search-button col-xs-12 text-right">
-            <%= f.select 'search[how]', options_for_select({ "部分一致" => "partical", "前方一致" => "forward", "後方一致" => "backward", "完全一致" => "match" }) %>
-            <%= f.submit :"検索" %>
-          </span>
-        <% end %>
+              <%= f.text_field 'search[value]', size: "26x4" %><br>
+              <span class="search-button col-xs-12 text-right"><br>
+              <%= f.select 'search[how]', options_for_select({ "部分一致" => "partical", "前方一致" => "forward", "後方一致" => "backward", "完全一致" => "match" }) %>
+              <%= f.submit :"Search" ,class:"fas btn btn-primary ml-5" %>
+              </span>
+            <% end %>
           </td>
         </tr>
       </table>
     </div>
-    <% end %>
-    <div class="col-md-10 pt-5">
+    <div class="pt-5">
       <table class="table genre-table">
         <thead>
           <tr>
-            <th class="text-center">募集形態で検索</th>
+            <th class="text-center">期間検索</th>
           </tr>
         </thead>
         <tbody>
@@ -68,13 +66,13 @@
             <td colspan="2" class="favo_button">
               <% if job_offer.favorited_by?(current_user) %>
                 <%= link_to users_job_offer_favos_path(job_offer), method: :delete do %>
-                 <i class="fas fa-star btn-lg btn-warning fas fa-sign-out-alt"><%= job_offer.favos.count %></i>
+                 <i class="fas fa-star btn-lg btn-warning fas fa-sign-out-alt btn-block"><%= job_offer.favos.count %></i>
                 <% end %>
                </p>
                <% else %>
                <p>
                 <%= link_to users_job_offer_favos_path(job_offer), method: :post do %>
-                 <i class="far fa-star btn-lg btn-light fas fa-sign-out-alt"><%= job_offer.favos.count %></i>
+                 <i class="far fa-star btn-lg btn-light fas fa-sign-out-alt btn-block"><%= job_offer.favos.count %></i>
                 <% end %>
             </td>
               <% end %>
@@ -83,7 +81,7 @@
       </table>
     </div>
    </div>
-   <div class="col-md-4 offset-md-2">
+   <div class="col-md-4 mx-auto">
     <h2 class="job_offer-headline head-line title_h2 text-center pt-5"><i class="fas fa-indent"></i>求人一覧</h2>
 		<h5 class="text-center">
 		  ページ:<%= @job_offers.current_page %> / <%= @job_offers.total_pages %><br>
@@ -113,15 +111,15 @@
              </td>
              <td class="favo_button text-right">
                <% if job_offer.favorited_by?(current_user) %>
-                 <p>
+                 <p class="text-center">
                   <%= link_to users_job_offer_favos_path(job_offer), method: :delete do %>
-                   <i class="fas fa-star btn-lg btn-warning fas fa-sign-out-alt"><%= job_offer.favos.count %></i>
+                   <i class="fas fa-star btn-lg btn-warning fas fa-sign-out-alt btn-block"><%= job_offer.favos.count %></i>
                   <% end %>
                  </p>
                  <% else %>
-                 <p>
+                 <p class="text-center">
                   <%= link_to users_job_offer_favos_path(job_offer), method: :post do %>
-                   <i class="far fa-star btn-lg btn-light fas fa-sign-out-alt"><%= job_offer.favos.count %></i>
+                   <i class="far fa-star btn-lg btn-light fas fa-sign-out-alt btn-block"><%= job_offer.favos.count %></i>
                   <% end %>
                  </p>
                <% end %>
