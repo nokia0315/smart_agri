@@ -73,21 +73,18 @@ footer {
 }
 
 
-.reviews,.blogs{
+.reviews,.blogs,.farmer_job_offers{
   display: flex;
   margin: 5px;
   padding: 10px;
 }
-.blog_box {
-  width: 30vh;
-  margin: 0 auto;
-}
+
 
 .rate-star{
   display: inline-block;
 }
 
-.review_box {
+.review_box,.farmer_job_offer_box,.blog_box {
   width: 30vh;
   margin: 0 auto;
 }
